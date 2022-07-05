@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+carbonara:
+  name: carbonara
+  body: 'la carbonara si fa con le uova'
+
+amatriciana:
+  name: amatriciana
+  body: 'si fa col pomodoro'

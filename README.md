@@ -23,4 +23,8 @@ Things you may want to cover:
 
 * Deployment instructions
 
+* auto correct code with rubocop
+    before any commit or push:
+    rubocop --autocorrect-all
+
 * ...
