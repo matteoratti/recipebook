@@ -27,4 +27,13 @@ Things you may want to cover:
     before any commit or push:
     rubocop --autocorrect-all
 
-* ...
+* Command line
+
+creates new rails app with bootstrap installed and postgresql DB
+  rails new recipebook --css bootstrap --database=postgresql
+
+creates the DB
+  rails db:create
+
+Starts Dev server
+  bin/dev
