@@ -5,5 +5,5 @@ class Ingredient < ApplicationRecord
 
   validates :name, :quantity, presence: true
 
-  enum unit_type: { ml: 0, g: 1}
+  enum unit_type: { ml: 0, g: 1 }
 end

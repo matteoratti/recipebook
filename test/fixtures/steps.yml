@@ -2,14 +2,14 @@
 
 one:
   recipe: carbonara
-  description: MyString
+  description: bollire la pasta
   order: 1
-  body: MyText
-  duration: 1
+  body: body bollire pasta
+  duration: 1200
 
 two:
   recipe: carbonara
-  description: MyString
-  order: 1
-  body: MyText
-  duration: 1
+  description: friggere la pancetta
+  order: 2
+  body: body friggere la pancetta
+  duration: 600

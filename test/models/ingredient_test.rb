@@ -22,7 +22,7 @@ class IngredientTest < ActiveSupport::TestCase
   test 'invalid without quantity' do
     @ingredient.quantity = nil
     assert_not @ingredient.valid?, 'saved ingredient without a quantity'
-    assert_equal "can't be blank", @ingredient.errors[:quantity][0]
+    assert_equal "Quantity can't be blank", @ingredient.errors.full_messages.first
   end
 
   test 'save a valid ingredient' do

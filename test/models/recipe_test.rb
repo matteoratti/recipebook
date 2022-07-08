@@ -20,7 +20,7 @@ class RecipeTest < ActiveSupport::TestCase
   test 'invalid without body' do
     @recipe.body = nil
     assert_not @recipe.valid?, 'saved recipe without a body'
-    assert_equal "can't be blank", @recipe.errors[:body][0]
+    assert_equal "Body can't be blank", @recipe.errors.full_messages.first
   end
 
   test 'save a valid recipe' do
