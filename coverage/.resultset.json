@@ -66,6 +66,8 @@
       },
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/tag.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           null
@@ -99,26 +101,18 @@
           7,
           null,
           7,
-          7,
-          8,
           4,
           null,
-          6,
           3,
           null,
           null,
           null,
           null,
-          null,
           1,
-          2,
-          2,
           2,
           1,
           null,
-          2,
           1,
-          null,
           null,
           null,
           null,
@@ -127,9 +121,6 @@
           2,
           null,
           2,
-          4,
-          2,
-          null,
           null,
           null,
           1,
@@ -224,7 +215,7 @@
         }
       }
     },
-    "timestamp": 1657543052
+    "timestamp": 1657546825
   },
   "Unit Tests": {
     "coverage": {

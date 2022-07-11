@@ -23,6 +23,12 @@ Things you may want to cover:
 
 * Deployment instructions
   deploy on heroku use x86_64-linux platform on gemfile.lock
+  push to heroku
+    git push heroku main
+  logs on terminal
+    heroku logs --tail  display
+  run migrations
+    heroku run rails db:migrate run 
 
 * auto correct code with rubocop
     before any commit or push:
