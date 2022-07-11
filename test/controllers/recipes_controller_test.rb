@@ -48,6 +48,32 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to recipes_url
   end
 
+  test 'should destroy recipe ingredients when destroy recipe' do
+    assert_difference('RecipesIngredient.count', -1) do
+      delete recipe_url(@recipe)
+    end
+
+    assert_redirected_to recipes_url
+  end
+
+  test 'invalid if missing :presence validation' do
+    params = { recipe: { body: @recipe.body, name: @recipe.name } } # TODO: should be created dynamically
+
+    Recipe.validators.each do |v|
+      next unless v.kind == :presence
+
+      v.attributes.each do |attr|
+        params[:recipe][attr] = nil
+
+        assert_no_difference('Recipe.count') do
+          post recipes_url, params: params
+        end
+
+        assert_response 422
+      end
+    end
+  end
+
   test 'invalid recipe creation' do
     assert_no_difference('Recipe.count') do
       post recipes_url, params: { recipe: { body: @recipe.body, name: nil } }
@@ -61,20 +87,24 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     assert_response 422
   end
 
-  test 'create a recipe with ingredients' do
-    ingredients = [
-      { name: 'uova', unit_type: 'ml', quantity: 1 },
-      { name: 'pancetta', unit_type: 'g', quantity: 5 }
+  test 'create a recipe with recipe ingredients' do
+    ingredient1 = ingredients(:uova)
+    ingredient2 = ingredients(:parmiggiano)
+    recipe_ingredients = [
+      { ingredient_id: ingredient1.id, quantity: 1 },
+      { ingredient_id: ingredient2.id, quantity: 4 }
     ]
 
     assert_difference('Recipe.count') do
       post recipes_url,
-           params: { recipe: { body: @recipe.body, name: @recipe.name, ingredients_attributes: ingredients } }
+           params: { recipe: { body: @recipe.body, name: @recipe.name,
+                               recipes_ingredients_attributes: recipe_ingredients } }
     end
 
-    assert_equal ingredients[0],
-                 Recipe.last.ingredients.first.attributes.symbolize_keys.except(:id, :created_at, :updated_at,
-                                                                                :recipe_id)
+    assert_equal recipe_ingredients[0],
+                 Recipe.last.recipes_ingredients.first.attributes.symbolize_keys
+                       .except(:id, :created_at, :updated_at, :recipe_id, :ingredient_name, :recipe_name)
+
     assert_redirected_to recipe_url(Recipe.last)
   end
 

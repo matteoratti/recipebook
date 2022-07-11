@@ -7,6 +7,7 @@
           null,
           1,
           1,
+          1,
           null,
           1,
           null,
@@ -34,6 +35,18 @@
           1,
           null,
           1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/recipes_ingredient.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
           null
         ]
       },
@@ -50,17 +63,10 @@
       },
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/recipes_controller.rb": {
         "lines": [
-          1,
-          1,
           null,
           null,
           1,
           1,
-          null,
-          null,
-          null,
-          1,
-          null,
           null,
           null,
           1,
@@ -71,17 +77,24 @@
           1,
           null,
           null,
+          1,
+          1,
+          null,
+          null,
           null,
           1,
-          4,
           null,
-          4,
-          4,
+          null,
+          1,
+          6,
+          null,
+          6,
+          6,
           6,
           3,
           null,
-          2,
-          1,
+          6,
+          3,
           null,
           null,
           null,
@@ -101,23 +114,25 @@
           null,
           null,
           1,
-          1,
-          null,
-          1,
           2,
-          1,
+          null,
+          2,
+          4,
+          2,
           null,
           null,
           null,
           1,
-          null,
-          1,
-          5,
-          null,
           null,
           null,
           1,
           6,
+          null,
+          null,
+          null,
+          1,
+          8,
+          null,
           null,
           null
         ]
@@ -140,6 +155,8 @@
       },
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/recipes_helper.rb": {
         "lines": [
+          null,
+          null,
           1,
           null
         ]
@@ -196,7 +213,7 @@
         }
       }
     },
-    "timestamp": 1657280084
+    "timestamp": 1657540425
   },
   "Unit Tests": {
     "coverage": {

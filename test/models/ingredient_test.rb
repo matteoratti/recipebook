@@ -5,8 +5,7 @@ require 'test_helper'
 class IngredientTest < ActiveSupport::TestCase
   def setup
     # take recipe from recipes fixture
-    recipe = recipes(:carbonara)
-    @ingredient = Ingredient.new(recipe: recipe, name: 'uova', quantity: 10)
+    @ingredient = Ingredient.new(name: 'uova', unit_type: :unit)
   end
 
   test 'valid ingredient' do
@@ -19,10 +18,10 @@ class IngredientTest < ActiveSupport::TestCase
     assert_not_nil @ingredient.errors[:name], 'no validation error for ingredient present'
   end
 
-  test 'invalid without quantity' do
-    @ingredient.quantity = nil
+  test 'invalid without unit type' do
+    @ingredient.unit_type = nil
     assert_not @ingredient.valid?, 'saved ingredient without a quantity'
-    assert_equal "Quantity can't be blank", @ingredient.errors.full_messages.first
+    assert_equal "Unit type can't be blank", @ingredient.errors.full_messages.first
   end
 
   test 'save a valid ingredient' do
@@ -32,10 +31,5 @@ class IngredientTest < ActiveSupport::TestCase
   test 'not save an invalid ingredient' do
     @ingredient.name = nil
     assert_not @ingredient.save
-  end
-
-  test 'invalid ingredient without recipe' do
-    @ingredient.recipe = nil
-    assert_not @ingredient.valid?
   end
 end

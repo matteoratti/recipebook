@@ -7,3 +7,7 @@ carbonara:
 amatriciana:
   name: amatriciana
   body: 'si fa col pomodoro'
+
+pollo_al_limone:
+  name: 'pollo al limone'
+  body: 'si fa col il limone'

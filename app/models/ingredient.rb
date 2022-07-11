@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Ingredient < ApplicationRecord
-  belongs_to :recipe
+  has_many :recipes_ingredients, dependent: :destroy
+  has_many :recipes, through: :recipes_ingredients
 
-  validates :name, :quantity, presence: true
+  validates :name, :unit_type, presence: true
 
-  enum unit_type: { ml: 0, g: 1 }
+  enum unit_type: { ml: 0, g: 1, unit: 2 }
 end

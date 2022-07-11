@@ -31,4 +31,15 @@ class RecipeTest < ActiveSupport::TestCase
     @recipe.name = nil
     assert_not @recipe.save
   end
+
+  test 'not save if any :presence validation is missing' do
+    Recipe.validators.each do |v|
+      next unless v.kind == :presence
+
+      v.attributes.each do |attr|
+        @recipe[attr] = nil
+        assert_not @recipe.save
+      end
+    end
+  end
 end
