@@ -22,6 +22,7 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+  deploy on heroku use x86_64-linux platform on gemfile.lock
 
 * auto correct code with rubocop
     before any commit or push:
