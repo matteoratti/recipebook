@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+cucina_italiana:
+  name: 'cucina italiana'
+  taggable: carbonara (Recipe)
+
+gluten_free:
+  name: 'gluten free'
+  taggable: uova (Ingredient)

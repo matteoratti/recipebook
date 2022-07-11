@@ -122,4 +122,18 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
                  Recipe.last.steps.first.attributes.symbolize_keys.except(:id, :created_at, :updated_at, :recipe_id)
     assert_redirected_to recipe_url(Recipe.last)
   end
+
+  test 'create a recipe with tags' do
+    tags = [
+      { name: 'cucina italiana' },
+      { name: 'gluten free' }
+    ]
+
+    assert_difference('Recipe.count') do
+      post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, tags_attributes: tags } }
+    end
+
+    assert_equal tags[0][:name], Recipe.last.tags.first.name
+    assert_redirected_to recipe_url(Recipe.last)
+  end
 end
