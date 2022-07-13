@@ -1,54 +1,98 @@
-# README
+# Recipe Book README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Manage your own recipes with this wep app made in Ruby on Rails.
 
-Things you may want to cover:
+## Ruby version
+  * ruby 3.0.0
 
-* Ruby version
+## System dependencies
 
-    ruby 3.0.0
+## Configuration
 
-* System dependencies
+## Database
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-  deploy on heroku use x86_64-linux platform on gemfile.lock
-  push to heroku
-    git push heroku main
-  logs on terminal
-    heroku logs --tail  display
-  run migrations
-    heroku run rails db:migrate run 
-
-* auto correct code with rubocop
-    before any commit or push:
-    rubocop --autocorrect-all
-
-
-
-Commands:
-
-* creates new rails app with bootstrap installed and postgresql DB
-  rails new recipebook --css bootstrap --database=postgresql
-
-creates the DB
+DB creation
+```bash
   rails db:create
+```
+
+DB Drop
+```bash
+rails db:drop
+```
+
+Make DB migrations
+```bash
+rails db:migrate
+```
+
+## How to run the test suite
+
+```bash
+rails test
+```
+
+## Services (job queues, cache servers, search engines, etc.)
+
+## Deployment
+
+Add this string platform on `gemfile.lock` under PLATFORMS.
+```bash
+x86_64-linux
+``` 
+
+Push to heroku
+```bash
+git push heroku main
+```
+
+## Heroku
+
+Login to Heroku CLI
+
+```bash
+ heroku login
+```
+
+Run Migrations on Heroku
+```bash
+heroku run rails db:migrate run
+```
+
+Logs on terminal
+```bash
+heroku logs --tail
+```
+
+## Development
+
+creates new rails app with bootstrap and PostgreSQL
+```bash
+rails new recipebook --css bootstrap --database=postgresql
+```
 
 Starts Dev server
-  bin/dev
 
+    bin/dev
+   
 
+Auto correct code with Rubocop before any commit or push.
+```bash
+rubocop --autocorrect-all
+```
 
-TO DO:
+## Generators
 
-Rails/Ruby Solid principles 
+Model
+```bash
+rails g model user email:string username:string
+```
+
+Scaffold Controller
+```bash
+rails g scaffold_controller Model field1 field2
+```
+
+## VS Code
+
+Preview README.md `shift+command+v`
