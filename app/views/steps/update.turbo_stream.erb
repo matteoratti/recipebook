@@ -1,0 +1,5 @@
+<%= turbo_stream.update nested_dom_id(@recipe, Step.new), "" %>
+
+<%= turbo_stream.update nested_dom_id(@recipe, @step) do %>
+  <%= render @step, recipe: @recipe %>
+<% end %>

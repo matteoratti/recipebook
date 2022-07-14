@@ -1,0 +1,7 @@
+<%# Step 1: empty the Turbo Frame containing the form %>
+<%= turbo_stream.update nested_dom_id(@recipe, Step.new), "" %>
+
+<%# Step 2: append the created line item to the list %>
+<%= turbo_stream.append nested_dom_id(@recipe, "steps") do %>
+  <%= render @step, recipe: @recipe %>
+<% end %>

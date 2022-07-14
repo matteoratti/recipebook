@@ -1,0 +1,32 @@
+<%= form_with(model: step, url: [recipe, step]) do |step_field| %>
+  <div class="card shadow-sm col-4 my-3">
+    <div class="card-body">
+
+      <div class="row my-3">
+        <div class="col">
+          <%= step_field.text_field :description, class: "form-control", placeholder: "Description"%>
+        </div>
+
+        <div class="col">
+          <%= step_field.number_field :order, class: "form-control", placeholder: "Order"%>
+        </div>
+        <div class="col">
+          <%= step_field.number_field :duration, class: "form-control", placeholder: "Duration"%>
+        </div>
+      </div>
+
+      <div class="row my-3">
+        <div class="col">
+          <%= step_field.text_area :body, class: "form-control", placeholder: "Body"%>
+        </div>
+      </div>
+
+
+      <div class="d-flex justify-content-between align-items-center my-3">
+        <div class="btn-group">
+          <%= step_field.submit class: "btn btn-success" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
