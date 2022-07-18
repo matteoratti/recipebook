@@ -95,4 +95,10 @@ rails g scaffold_controller Model field1 field2
 
 ## VS Code
 
+
+Rails/Ruby Solid principles 
+
+
+* Tests
+    >  If you running tests for the first time you need to build css and js with: `yarn build:css` and `yarn build` before start tests. Otherwise run: `.bin/dev` to trigger ./procfile.dev and trigger both command and run rails server.
 Preview README.md `shift+command+v`

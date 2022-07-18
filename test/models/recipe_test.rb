@@ -11,6 +11,10 @@ class RecipeTest < ActiveSupport::TestCase
     assert @recipe.valid?
   end
 
+  test 'recipe should be draft by default' do
+    assert @recipe.status, 'draft'
+  end
+
   test 'invalid without name' do
     @recipe.name = nil
     assert_not @recipe.valid?, 'saved recipe without a name'
