@@ -12,23 +12,25 @@
   </div>
 </section>
 
-<div class="album py-5 bg-light">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    <% @recipes.each do |recipe| %>
-      <div class="col">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h4><%= recipe.name.capitalize %></h4>
-            <p class="card-text"><%= recipe.body.capitalize %></p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <%= link_to "View", recipe, class: "btn btn-sm btn-outline-secondary" %>
+<div class="py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <% @recipes.each do |recipe| %>
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h4><%= recipe.name.capitalize %></h4>
+              <p class="card-text"><%= recipe.body.capitalize %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to "View", recipe, class: "btn btn-sm btn-outline-secondary" %>
+                </div>
+                <small class="text-muted">{ somma durata degli steps }</small>
               </div>
-              <small class="text-muted">{ somma durata degli steps }</small>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

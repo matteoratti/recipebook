@@ -2,23 +2,23 @@
 
   <div class="card shadow-sm">
     <div class="card-body">
-      <small class="text-muted"><%= step.order %>.</small>
-      <h4><%= step.description %></h4>
-      <p class="card-text"><%= step.body %></p>
       <div class="d-flex justify-content-between align-items-center">
-        <div class="btn-group">
-          <%= link_to "Edit",
-                      [:edit,recipe, step],
+        <small class="text-muted"><%= step.order %>.</small>
+        <div class="d-flex gap-2">
+          <%= link_to [:edit,recipe, step],
                       data: { turbo_frame: nested_dom_id(recipe, Step.new) },
-                      class: "btn btn-sm btn-outline-secondary" %>
-          <%= button_to "Delete",
+                      class: "btn btn-sm btn-outline-secondary" do %>
+                      <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+          <%= button_to raw("<i class=\"fa-solid fa-trash\"></i>"),
                         [recipe, step],
                         method: :delete,
                         class: "btn btn-sm btn-outline-danger" %>
         </div>
-        <small class="text-muted"><%= step.duration %> min</small>
       </div>
+      <h4><%= step.description %></h4>
+      <p class="card-text"><%= step.body %></p>
+      <small class="text-muted"><%= step.duration %> min</small>
     </div>
   </div>
-
 <% end %>

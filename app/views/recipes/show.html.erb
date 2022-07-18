@@ -1,26 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light"><%= @recipe.name.capitalize %></h1>
-      <p class="lead text-muted"><%= @recipe.body.capitalize %></p>
-      <p>
-        <%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: "btn btn-primary my-2" %>
-        <%= button_to "Destroy this recipe", @recipe, method: :delete, class: "btn btn-danger my-2" %>
-      </p>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <%= turbo_frame_tag nested_dom_id(@recipe, 'edit') do %>
+          <h1 class="fw-light"><%= @recipe.name.capitalize %></h1>
+          <p class="lead text-muted"><%= @recipe.body.capitalize %></p>
+          <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary my-2" %>
+          <%= button_to "Destroy", @recipe, method: :delete, class: "btn btn-danger my-2", :form_class => "d-inline-block" %>
+        <% end %>
+      </div>
     </div>
+  </section>
+
+<div class="container">
+
+  <h3 class="m-0">Steps</h3>
+
+  <div class="album py-5">
+    <%= render @recipe %>
   </div>
-</section>
-
-<h3 class="mt-3">Steps</h3>
-
-<div class="album py-5">
-  <%= render @recipe %>
-</div>
-
   <%= link_to "Add New Step",
               [:new, @recipe, :step],
               data: { turbo_frame: nested_dom_id(@recipe, Step.new) },
               class: "btn btn-primary" %>
+</div>
+
+
 

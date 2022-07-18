@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/e80ee7b913.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
     <%= render "shared/header" %>
-    <main class="container">
+
+    <main>
       <%= yield %>
     </main>
+    
     <footer class="text-muted py-5">
       <div class="container">
         <p class="float-end mb-1">
