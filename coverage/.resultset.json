@@ -32,8 +32,17 @@
           null,
           1,
           1,
+          null,
+          1,
           1,
           null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
           1,
           1,
           null,
@@ -168,6 +177,9 @@
           null,
           null,
           1,
+          1,
+          30,
+          null,
           null
         ]
       },
@@ -194,6 +206,60 @@
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/steps_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
           null,
           0,
           0,
@@ -231,7 +297,7 @@
         }
       }
     },
-    "timestamp": 1657711286
+    "timestamp": 1658153621
   },
   "Unit Tests": {
     "coverage": {

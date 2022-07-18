@@ -36,7 +36,4 @@ class TagTest < ActiveSupport::TestCase
   test 'should save with all fields' do
     assert @tag.save
   end
-
-
 end
-

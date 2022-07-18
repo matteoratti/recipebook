@@ -4,7 +4,7 @@ require 'test_helper'
 
 class RecipesIngredientTest < ActiveSupport::TestCase
   def setup
-    @recipes_ingredient = RecipesIngredient.new(recipe: recipes(:carbonara), ingredient: ingredients(:uova), quantity: 5 )
+    @recipes_ingredient = RecipesIngredient.new(recipe: recipes(:carbonara), ingredient: ingredients(:uova), quantity: 5)
   end
 
   test 'a valid recipes ingredient' do

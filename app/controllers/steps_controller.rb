@@ -2,7 +2,7 @@
 
 class StepsController < ApplicationController
   before_action :set_recipe
-  before_action :set_step, only: [:edit, :update, :destroy]
+  before_action :set_step, only: %i[edit update destroy]
 
   def new
     @step = Step.new
