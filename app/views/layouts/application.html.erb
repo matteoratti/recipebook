@@ -11,6 +11,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "shared/header" %>
+    <main class="container">
+      <%= yield %>
+    </main>
+    <footer class="text-muted py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">Created by JPsevern and Malstrom</p>
+      </div>
+    </footer>
   </body>
+
 </html>

@@ -46,4 +46,12 @@ class RecipeTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test 'when destroy recipe, destroy all tags too' do
+    @recipe.tags.build([{name:'ricette italiane'},{name:'ricette popolari'}])
+    @recipe.save
+
+    assert @recipe.destroy
+    assert_empty @recipe.tags
+  end
 end

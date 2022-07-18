@@ -32,4 +32,13 @@ class IngredientTest < ActiveSupport::TestCase
     @ingredient.name = nil
     assert_not @ingredient.save
   end
+
+  test 'when destroy ingredient, destroy all tags too' do
+    @ingredient.save
+    tag1 = Tag.create(name: 'ricette italiane', taggable: @ingredient)
+    tag2 = Tag.create(name: 'ricette popolari', taggable: @ingredient)
+
+    assert @ingredient.destroy
+    assert_raise(ActiveRecord::RecordNotFound) { tag1.reload tag2.reload }
+  end
 end

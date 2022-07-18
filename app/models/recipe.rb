@@ -18,5 +18,5 @@ class Recipe < ApplicationRecord
 
   validates :name, :body, presence: true
 
-  accepts_nested_attributes_for :recipes_ingredients, :steps, :tags
+  accepts_nested_attributes_for :recipes_ingredients, :tags
 end

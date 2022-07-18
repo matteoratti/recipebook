@@ -1,14 +1,34 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Recipes</h1>
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Recipes Album</h1>
+      <p class="lead text-muted">Discover your best friend's recipes and share yours!</p>
+      <p>
+        <%= link_to "New recipe", new_recipe_path, class: "btn btn-primary my-2" %>
+      </p>
+    </div>
+  </div>
+</section>
 
-<div id="recipes">
-  <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
-  <% end %>
+<div class="album py-5 bg-light">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <% @recipes.each do |recipe| %>
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4><%= recipe.name.capitalize %></h4>
+            <p class="card-text"><%= recipe.body.capitalize %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <%= link_to "View", recipe, class: "btn btn-sm btn-outline-secondary" %>
+              </div>
+              <small class="text-muted">{ somma durata degli steps }</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New recipe", new_recipe_path %>
