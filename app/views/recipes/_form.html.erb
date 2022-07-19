@@ -16,6 +16,7 @@
       <%= form.text_field :name, autofocus: true, class: "form-control edit-title" %>
       <%= form.text_area :body, class: "form-control edit-body" %>
       <%= form.submit :class => "btn btn-primary mt-3" %>
+      <%= link_to "Cancel", recipe, class: "btn btn-danger mt-3" %>
     </div>
   </div>
 <% end %>
