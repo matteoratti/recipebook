@@ -8,9 +8,9 @@
           <%= link_to [:edit,recipe, step],
                       data: { turbo_frame: nested_dom_id(recipe, Step.new) },
                       class: "btn btn-sm btn-outline-secondary" do %>
-                      <i class="fa-solid fa-pen-to-square"></i>
+                      <i class="bi bi-pencil-square"></i>
           <% end %>
-          <%= button_to raw("<i class=\"fa-solid fa-trash\"></i>"),
+          <%= button_to raw("<i class=\"bi bi-trash-fill\"></i>"),
                         [recipe, step],
                         method: :delete,
                         class: "btn btn-sm btn-outline-danger" %>
