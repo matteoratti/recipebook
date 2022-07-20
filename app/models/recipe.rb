@@ -9,6 +9,8 @@ class Recipe < ApplicationRecord
   has_many :steps, dependent: :destroy
   has_many :tags, as: :taggable, dependent: :destroy
 
+  has_one_attached :image
+
   scope :with_steps,       -> { includes(:steps).references(:steps) }
   scope :with_ingredients, -> { includes(:ingredients).references(:ingredients) }
 

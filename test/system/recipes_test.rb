@@ -4,7 +4,7 @@ require 'application_system_test_case'
 
 class RecipesTest < ApplicationSystemTestCase
   setup do
-    @recipe = recipes(:one)
+    @recipe = recipes(:carbonara)
   end
 
   test 'visiting the index' do
@@ -41,5 +41,13 @@ class RecipesTest < ApplicationSystemTestCase
     click_on 'Destroy this recipe', match: :first
 
     assert_text 'Recipe was successfully destroyed'
+  end
+
+  test 'if not attached, recipe image should not show' do
+    visit recipe_url(@recipe)
+
+    assert_not @recipe.image.attached?
+
+    assert_selector 'img', count: 0
   end
 end
