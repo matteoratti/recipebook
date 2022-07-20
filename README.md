@@ -7,6 +7,14 @@ Manage your own recipes with this wep app made in Ruby on Rails.
 
 ## System dependencies
 
+  * Active Storage
+
+  RecipeBook uses libvips library, you need to install it in your system.
+  Follow this link for installation instructions:
+
+  https://www.libvips.org/install.html
+
+
 ## Configuration
 
 ## Testing
