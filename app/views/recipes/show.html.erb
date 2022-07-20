@@ -1,20 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <%= turbo_frame_tag nested_dom_id(@recipe, 'edit') do %>
-          <h1 class="fw-light"><%= @recipe.name.capitalize %></h1>
-          <p class="lead text-muted"><%= @recipe.body.capitalize %></p>
-          <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary my-2" %>
-          <%= button_to "Destroy", @recipe, method: :delete, class: "btn btn-danger my-2", :form_class => "d-inline-block" %>
-        <% end %>
-      </div>
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <%= turbo_frame_tag nested_dom_id(@recipe, 'edit') do %>
+        <%= image_tag url_for(@recipe.image), class: "img-fluid" if @recipe.image.attached? %>
+        <h1 class="fw-light"><%= @recipe.name.capitalize %></h1>
+        <p class="lead text-muted"><%= @recipe.body.capitalize %></p>
+        <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary my-2" %>
+        <%= button_to "Destroy", @recipe, method: :delete, class: "btn btn-danger my-2", :form_class => "d-inline-block" %>
+      <% end %>
     </div>
-  </section>
+  </div>
+</section>
 
 <div class="container">
-
   <h3 class="m-0">Steps</h3>
 
   <div class="album py-5">

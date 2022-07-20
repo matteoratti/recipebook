@@ -9,6 +9,18 @@ Manage your own recipes with this wep app made in Ruby on Rails.
 
 ## Configuration
 
+## Testing
+
+run System testing
+```bash
+  bin/rails test:system
+```
+
+run tests
+```bash
+  rails test
+```
+
 ## Database
 
 DB creation
@@ -24,12 +36,6 @@ rails db:drop
 Make DB migrations
 ```bash
 rails db:migrate
-```
-
-## How to run the test suite
-
-```bash
-rails test
 ```
 
 ## Services (job queues, cache servers, search engines, etc.)
