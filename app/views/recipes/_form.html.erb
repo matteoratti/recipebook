@@ -1,3 +1,8 @@
+<% if recipe.image.present? %> 
+  <%= image_tag url_for(recipe.image), class: "img-fluid" %>
+  <%= button_to "delete current image", delete_image_recipe_path, class: "btn btn-outline-danger my-3", method: :delete %>
+<% end %> 
+
 <%= form_with(model: recipe, class: "inline-edit-form") do |form| %>
   <% if recipe.errors.any? %>
     <div style="color: red">
@@ -13,10 +18,6 @@
 
   <div class="row justify-content-center">
     <div class="form-group col-8">
-      <% if !form.object.new_record? && form.object.image.present? %> 
-        <%= image_tag url_for(@recipe.image), class: "img-fluid" %>
-      <% end %> 
-      
       <%= form.text_field :name, autofocus: true, placeholder: "Title", class: "form-control edit-title" %>
       <%= form.text_area :body, placeholder: "Body", class: "form-control edit-body" %>
       <%= form.file_field :image %>

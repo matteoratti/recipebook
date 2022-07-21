@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update destroy add_step]
+  before_action :set_recipe, only: %i[show edit update destroy add_step delete_image]
 
   # GET /recipes or /recipes.json
   def index
@@ -44,6 +44,12 @@ class RecipesController < ApplicationController
     @recipe.destroy
 
     redirect_to recipes_url, notice: 'Recipe was successfully destroyed.'
+  end
+
+  def delete_image
+    @recipe.image.purge if @recipe.image.attached?
+
+    redirect_to recipe_path(@recipe)
   end
 
   private

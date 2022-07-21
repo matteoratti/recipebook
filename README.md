@@ -95,6 +95,9 @@ Auto correct code with Rubocop before any commit or push.
 rubocop --autocorrect-all
 ```
 
+display all routes with their helpers on browser:
+  http://localhost:3000/rails/info/routes
+
 ## Generators
 
 Model

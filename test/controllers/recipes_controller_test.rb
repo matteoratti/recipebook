@@ -144,4 +144,16 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
 
     assert Recipe.last.image.attached?
   end
+
+  test 'delete only recipe image' do
+    post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
+
+    delete delete_image_recipe_path(Recipe.last)
+
+    assert Recipe.last.present?
+
+    assert_not Recipe.last.image.attached?
+
+    assert_redirected_to recipe_url(Recipe.last)
+  end
 end
