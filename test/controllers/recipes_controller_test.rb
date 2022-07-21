@@ -148,7 +148,7 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   test 'delete only recipe image' do
     post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
 
-    post delete_recipe_image_path(Recipe.last)
+    delete delete_image_recipe_path(Recipe.last)
 
     assert Recipe.last.present?
 

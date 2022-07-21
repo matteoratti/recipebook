@@ -1,6 +1,6 @@
 <% if recipe.image.present? %> 
   <%= image_tag url_for(recipe.image), class: "img-fluid" %>
-  <%= button_to "delete current image", delete_recipe_image_path, class: "btn btn-outline-danger my-3" %>
+  <%= button_to "delete current image", delete_image_recipe_path, class: "btn btn-outline-danger my-3", method: :delete %>
 <% end %> 
 
 <%= form_with(model: recipe, class: "inline-edit-form") do |form| %>
