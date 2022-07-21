@@ -32,8 +32,19 @@
           null,
           1,
           1,
+          null,
+          1,
           1,
           null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
           1,
           1,
           null,
@@ -114,10 +125,10 @@
           null,
           null,
           1,
-          7,
+          9,
           null,
-          7,
-          4,
+          9,
+          6,
           null,
           3,
           null,
@@ -140,15 +151,21 @@
           null,
           null,
           1,
+          1,
+          null,
+          1,
           null,
           null,
           1,
-          6,
+          null,
+          null,
+          1,
+          7,
           null,
           null,
           null,
           1,
-          9,
+          11,
           null,
           null,
           null,
@@ -168,6 +185,9 @@
           null,
           null,
           1,
+          1,
+          30,
+          null,
           null
         ]
       },
@@ -194,6 +214,60 @@
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/steps_controller.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
           null,
           0,
           0,
@@ -231,7 +305,7 @@
         }
       }
     },
-    "timestamp": 1657711286
+    "timestamp": 1658396028
   },
   "Unit Tests": {
     "coverage": {
@@ -240,6 +314,9 @@
           null,
           null,
           1,
+          1,
+          1,
+          null,
           1,
           null,
           1,
@@ -263,9 +340,49 @@
           null,
           1,
           1,
+          null,
+          1,
           1,
           null,
           1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/recipes_ingredient.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
           null
         ]
       },
@@ -274,6 +391,112 @@
           null,
           null,
           1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/tag.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/recipes_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/application_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          72,
+          null,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/recipes_helper.rb": {
+        "lines": [
+          null,
+          null,
           1,
           null
         ]
@@ -302,39 +525,19 @@
         "branches": {
         }
       },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/application_controller.rb": {
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/steps_controller.rb": {
         "lines": [
           null,
           null,
           0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/recipes_controller.rb": {
-        "lines": [
           0,
           0,
-          null,
           null,
           0,
           0,
           0,
           null,
-          null,
           0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
           null,
           0,
           0,
@@ -345,11 +548,6 @@
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
-          null,
           null,
           0,
           0,
@@ -358,17 +556,7 @@
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
           null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
           0,
           0,
           0,
@@ -379,27 +567,12 @@
           0,
           0,
           null,
+          0,
+          0,
+          0,
           null,
           0,
           0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/application_helper.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/recipes_helper.rb": {
-        "lines": [
           0,
           0
         ],
@@ -434,6 +607,6 @@
         }
       }
     },
-    "timestamp": 1657198298
+    "timestamp": 1658304007
   }
 }

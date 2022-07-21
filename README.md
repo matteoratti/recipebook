@@ -7,7 +7,27 @@ Manage your own recipes with this wep app made in Ruby on Rails.
 
 ## System dependencies
 
+  * Active Storage
+
+  RecipeBook uses libvips library, you need to install it in your system.
+  Follow this link for installation instructions:
+
+  https://www.libvips.org/install.html
+
+
 ## Configuration
+
+## Testing
+
+run System testing
+```bash
+  bin/rails test:system
+```
+
+run tests
+```bash
+  rails test
+```
 
 ## Database
 
@@ -24,12 +44,6 @@ rails db:drop
 Make DB migrations
 ```bash
 rails db:migrate
-```
-
-## How to run the test suite
-
-```bash
-rails test
 ```
 
 ## Services (job queues, cache servers, search engines, etc.)
@@ -80,6 +94,9 @@ Auto correct code with Rubocop before any commit or push.
 ```bash
 rubocop --autocorrect-all
 ```
+
+display all routes with their helpers on browser:
+  http://localhost:3000/rails/info/routes
 
 ## Generators
 

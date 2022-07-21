@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update destroy add_step]
+  before_action :set_recipe, only: %i[show edit update destroy add_step delete_image]
 
   # GET /recipes or /recipes.json
   def index
@@ -46,6 +46,12 @@ class RecipesController < ApplicationController
     redirect_to recipes_url, notice: 'Recipe was successfully destroyed.'
   end
 
+  def delete_image
+    @recipe.image.purge if @recipe.image.attached?
+
+    redirect_to recipe_path(@recipe)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -55,8 +61,8 @@ class RecipesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_params
-    params.require(:recipe).permit(:name, :body, recipes_ingredients_attributes: %i[ingredient_id quantity],
-                                                 steps_attributes:               %i[description order body duration],
-                                                 tags_attributes:                %i[name])
+    params.require(:recipe).permit(:name, :body, :image, recipes_ingredients_attributes: %i[ingredient_id quantity],
+                                                         steps_attributes:               %i[description order body duration],
+                                                         tags_attributes:                %i[name])
   end
 end

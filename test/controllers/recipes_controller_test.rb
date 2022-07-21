@@ -136,4 +136,24 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     assert_equal tags[0][:name], Recipe.last.tags.first.name
     assert_redirected_to recipe_url(Recipe.last)
   end
+
+  test 'create a recipe with an image' do
+    assert_difference('Recipe.count') do
+      post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
+    end
+
+    assert Recipe.last.image.attached?
+  end
+
+  test 'delete only recipe image' do
+    post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
+
+    delete delete_image_recipe_path(Recipe.last)
+
+    assert Recipe.last.present?
+
+    assert_not Recipe.last.image.attached?
+
+    assert_redirected_to recipe_url(Recipe.last)
+  end
 end
