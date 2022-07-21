@@ -22,6 +22,7 @@
       <%= form.text_area :body, placeholder: "Body", class: "form-control edit-body" %>
       <%= form.file_field :image %>
       <%= form.submit :class => "btn btn-primary mt-3" %>
+      <%= link_to "Cancel", recipe, class: "btn btn-danger mt-3" %>
     </div>
   </div>
 <% end %>
