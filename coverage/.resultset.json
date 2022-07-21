@@ -1,6 +1,25 @@
 {
   "Minitest": {
     "coverage": {
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/user.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/ingredient.rb": {
         "lines": [
           null,
@@ -13,15 +32,6 @@
           null,
           1,
           null,
-          1,
-          null
-        ]
-      },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/application_record.rb": {
-        "lines": [
-          null,
-          null,
-          1,
           1,
           null
         ]
@@ -101,95 +111,6 @@
           null
         ]
       },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/steps_controller.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
-          null,
-          2,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          2,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          6,
-          null,
-          null,
-          1,
-          3,
-          null,
-          null,
-          1,
-          4,
-          null,
-          null
-        ]
-      },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/application_controller.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/application_helper.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          66,
-          null,
-          null
-        ]
-      },
-      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/recipes_helper.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          3,
-          0,
-          null,
-          3,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/recipes_controller.rb": {
         "lines": [
           null,
@@ -262,6 +183,92 @@
           null
         ]
       },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/application_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          66,
+          null,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/helpers/recipes_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          3,
+          0,
+          null,
+          3,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/steps_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          6,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null
+        ]
+      },
       "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
@@ -314,6 +321,6 @@
         }
       }
     },
-    "timestamp": 1658412488
+    "timestamp": 1658414701
   }
 }

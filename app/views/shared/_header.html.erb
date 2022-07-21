@@ -23,6 +23,11 @@
         <i class="bi bi-book px-3"></i>
         <strong>RecipeBook</strong>
       </a>
+
+      <%= link_to "sign up", new_user_registration_path %>
+
+      <%= button_to "logout", destroy_user_session_path, method: :delete %>
+
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
