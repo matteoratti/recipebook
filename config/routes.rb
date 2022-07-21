@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  post 'recipes/:id/delete_image', to: 'recipes#delete_image', as: :delete_recipe_image
   resources :recipes do
     resources :steps
   end
