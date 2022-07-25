@@ -5,30 +5,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "devise", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <%= render "shared/header" %>
-
     <% unless flash.empty? %>
       <div class="alert  alert-<%= notice ? "primary" : "danger" %>" role="alert">
         <%= notice ? notice : alert %>
       </div>
     <% end %>
 
-    <main>
+    <main class="form-signin">
       <%= yield %>
     </main>
-    
-    <footer class="text-muted py-5">
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Created by JPsevern and Malstrom</p>
-      </div>
-    </footer>
   </body>
 </html>

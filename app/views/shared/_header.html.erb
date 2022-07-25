@@ -1,31 +1,19 @@
-<header>
-  <div class="bg-dark collapse" id="navbarHeader" style="">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">About</h4>
-          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Contact</h4>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-            <li><a href="#" class="text-white">Like on Facebook</a></li>
-            <li><a href="#" class="text-white">Email me</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+<header class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+  <%= link_to root_path, class:"navbar-brand d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" do %>
+    <i class="bi bi-book px-3"></i>
+    <strong>RecipeBook</strong>
+  <% end %>
+  <div class="col-md-3 text-center">
+    <% if current_user %>
+      <small>Hi <%= current_user.email %> !</small>
+    <% end %>
   </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container">
-      <a href="/" class="navbar-brand d-flex align-items-center">
-        <i class="bi bi-book px-3"></i>
-        <strong>RecipeBook</strong>
-      </a>
-      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
+  <div class="col-md-3 text-end">
+    <% if current_user %>
+      <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary me-2" %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-outline-primary me-2" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+    <% end %>
   </div>
 </header>
