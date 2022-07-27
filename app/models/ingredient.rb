@@ -6,6 +6,8 @@ class Ingredient < ApplicationRecord
 
   has_many :tags, as: :taggable, dependent: :destroy
 
+  include HasLikes
+
   validates :name, :unit_type, presence: true
 
   enum unit_type: { ml: 0, g: 1, unit: 2 }

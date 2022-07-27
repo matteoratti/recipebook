@@ -9,6 +9,8 @@
         <p class="lead text-muted"><%= @recipe.body.capitalize %></p>
         <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary my-2" %>
         <%= button_to "Destroy", @recipe, method: :delete, data:{turbo: false}, class: "btn btn-danger my-2", :form_class => "d-inline-block" %>
+        <%= like_element(@recipe) if current_user %>
+        <%= like_counter(@recipe) %>
       <% end %>
     </div>
   </div>

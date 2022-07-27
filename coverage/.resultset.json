@@ -10,6 +10,10 @@
           null,
           1,
           null,
+          null,
+          1,
+          null,
+          1,
           null
         ]
       },
@@ -19,6 +23,19 @@
           null,
           1,
           1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/concerns/has_likes.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          4,
+          4,
+          null,
+          null,
           null
         ]
       },
@@ -32,6 +49,20 @@
           null,
           1,
           null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/models/like.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
           1,
           null,
           1,
@@ -49,6 +80,8 @@
           1,
           null,
           1,
+          1,
+          null,
           1,
           null,
           1,
@@ -96,6 +129,8 @@
           null,
           null,
           1,
+          1,
+          null,
           1,
           null,
           1,
@@ -171,15 +206,22 @@
           null,
           1,
           1,
-          null,
           1,
           null,
           1,
-          14,
+          null,
+          1,
+          15,
           0,
           null,
-          14,
+          15,
           null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
           null,
           null
         ]
@@ -190,7 +232,21 @@
           null,
           1,
           1,
-          66,
+          80,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          5,
+          5,
+          null,
           null,
           null
         ]
@@ -205,6 +261,38 @@
           0,
           null,
           3,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/dafnecipriani/Desktop/matteo/projects/rails/recipebook/app/controllers/likes_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          0,
+          1,
+          1,
+          null,
+          0,
           null,
           null,
           null
@@ -334,6 +422,6 @@
         }
       }
     },
-    "timestamp": 1658498168
+    "timestamp": 1658927659
   }
 }
