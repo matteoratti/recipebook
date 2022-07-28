@@ -1,20 +1,29 @@
 # frozen_string_literal: true
 
 class LikesController < ApplicationController
-  before_action :authenticate_user!, only: %i[create]
-  before_action :set_likeable, only: %i[create]
+  before_action :authenticate_user!, only: %i[create destroy]
+  before_action :set_likeable, only: %i[create destroy]
+  before_action :set_like, only: %i[destroy]
 
   def create
     @like = Like.new(user: current_user, likeable: @likeable)
 
     if @like.save
-      render formats: :turbo_stream
+      render :like, formats: :turbo_stream
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def destroy
+    render :like, formats: :turbo_stream if @like.destroy
+  end
+
   private
+
+  def set_like
+    @like = Like.find(params[:id])
+  end
 
   def set_likeable
     @likeable = if params.include?(:user_id)

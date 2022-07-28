@@ -27,6 +27,12 @@ class LikeTest < ActiveSupport::TestCase
     assert_equal ['Likeable must exist'], @user1_likes_recipe1.errors.full_messages
   end
 
+  test 'destroy a like' do
+    @user1_likes_recipe1.save
+
+    assert @user1_likes_recipe1.destroy
+  end
+
   test 'user should give one like to one recipe' do
     @user1_likes_recipe1.save
 

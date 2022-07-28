@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   concern :likeable do
-    resources :likes, only: %i[create]
+    resources :likes, only: %i[create destroy]
   end
 
   resources :recipes, concerns: %i[image_deletable likeable] do
