@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, concerns: %i[likeable]
 
   concern :image_deletable do
     member do
@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :recipes, concerns: [:image_deletable] do
+  concern :likeable do
+    resources :likes, only: %i[create]
+  end
+
+  resources :recipes, concerns: %i[image_deletable likeable] do
     resources :steps
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

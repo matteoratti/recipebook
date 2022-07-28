@@ -21,19 +21,19 @@ Manage your own recipes with this wep app made in Ruby on Rails.
 
 run System testing
 ```bash
-  bin/rails test:system
+bin/rails test:system
 ```
 
 run tests
 ```bash
-  rails test
+rails test
 ```
 
 ## Database
 
 DB creation
 ```bash
-  rails db:create
+rails db:create
 ```
 
 DB Drop
@@ -65,7 +65,7 @@ git push heroku main
 Login to Heroku CLI
 
 ```bash
- heroku login
+heroku login
 ```
 
 Run Migrations on Heroku
@@ -82,13 +82,13 @@ heroku logs --tail
 
 creates new rails app with bootstrap and PostgreSQL
 ```bash
-rails new recipebook --css bootstrap --database=postgresql
+rails new appname --css bootstrap --database=postgresql
 ```
 
 Starts Dev server
-
-    bin/dev
-   
+```bash
+bin/dev
+```
 
 Auto correct code with Rubocop before any commit or push.
 ```bash
@@ -96,7 +96,7 @@ rubocop --autocorrect-all
 ```
 
 display all routes with their helpers on browser:
-  http://localhost:3000/rails/info/routes
+http://localhost:3000/rails/info/routes
 
 ## Generators
 
@@ -112,9 +112,7 @@ rails g scaffold_controller Model field1 field2
 
 ## VS Code
 
-
 Rails/Ruby Solid principles 
-
 
 * Tests
     >  If you running tests for the first time you need to build css and js with: `yarn build:css` and `yarn build` before start tests. Otherwise run: `.bin/dev` to trigger ./procfile.dev and trigger both command and run rails server.
