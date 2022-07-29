@@ -6,10 +6,18 @@ module ApplicationHelper
   end
 
   def like_element(likeable)
-    path = "#{likeable.model_name.singular_route_key}_likes_path"
-
     turbo_frame_tag nested_dom_id('button_like') do
-      button_to 'Like', public_send(path, likeable), class: 'btn btn-success my-2', form_class: 'd-inline-block' unless current_user_liked?(likeable)
+      model_name = likeable.model_name.singular_route_key
+
+      if current_likeable(likeable)
+        button_to public_send("#{model_name}_like_path", likeable, current_likeable(likeable)), method: :delete, class: 'btn btn-success my-2', form_class: 'd-inline-block' do
+          content_tag(:i, '', class: 'bi bi-heart-fill')
+        end
+      else
+        button_to public_send("#{model_name}_likes_path", likeable), class: 'btn btn-success my-2', form_class: 'd-inline-block' do
+          content_tag(:i, '', class: 'bi bi-heart')
+        end
+      end
     end
   end
 

@@ -1,4 +1,6 @@
-<%= turbo_stream.remove nested_dom_id('button_like') %>
+<%= turbo_stream.replace nested_dom_id('button_like') do %>
+  <%= like_element(@likeable) %>
+<% end %>
 
 <%= turbo_stream.update nested_dom_id('counter_like') do %>
   <%= like_counter(@likeable) %>
