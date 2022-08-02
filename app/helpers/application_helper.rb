@@ -6,11 +6,11 @@ module ApplicationHelper
   end
 
   def like_element(likeable)
-    turbo_frame_tag nested_dom_id('button_like') do
+    turbo_frame_tag nested_dom_id('button_like', likeable) do
       model_name = likeable.model_name.singular_route_key
 
-      if current_likeable(likeable)
-        button_to public_send("#{model_name}_like_path", likeable, current_likeable(likeable)), method: :delete, class: 'btn btn-success my-2', form_class: 'd-inline-block' do
+      if like_of_current_user(likeable)
+        button_to public_send("#{model_name}_like_path", likeable, like_of_current_user(likeable)), method: :delete, class: 'btn btn-success my-2', form_class: 'd-inline-block' do
           content_tag(:i, '', class: 'bi bi-heart-fill')
         end
       else
@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def like_counter(likeable)
-    turbo_frame_tag nested_dom_id('counter_like') do
+    turbo_frame_tag nested_dom_id('counter_like', likeable) do
       "#{likeable.likes.count} likes"
     end
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  helper_method :current_likeable
+  helper_method :like_of_current_user
   layout :layout_by_resource
 
   protected
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_likeable(likeable)
-    current_user.liked.find_by_likeable_id(likeable)
+  def like_of_current_user(likeable)
+    current_user.liked.find_by(likeable: likeable)
   end
 end
