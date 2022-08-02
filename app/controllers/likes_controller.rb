@@ -30,6 +30,8 @@ class LikesController < ApplicationController
                   User.find(params[:user_id])
                 elsif params.include?(:recipe_id)
                   Recipe.find(params[:recipe_id])
+                elsif params.include?(:step_id)
+                  Step.find(params[:step_id])
                 else
                   raise UnprocessableEntityError, :context_missing
                 end

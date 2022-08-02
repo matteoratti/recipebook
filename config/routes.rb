@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :recipes, concerns: %i[image_deletable likeable] do
     resources :steps
   end
+
+  resources :steps, concerns: %i[likeable], only: %i[]
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

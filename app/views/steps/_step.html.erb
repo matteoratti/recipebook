@@ -14,6 +14,8 @@
                         [recipe, step],
                         method: :delete,
                         class: "btn btn-sm btn-outline-danger" %>
+          <%= like_element(step) %>
+          <%= like_counter(step) %>
         </div>
       </div>
       <h4><%= step.description %></h4>
