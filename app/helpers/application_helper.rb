@@ -6,6 +6,8 @@ module ApplicationHelper
   end
 
   def like_element(likeable)
+    return unless current_user
+
     turbo_frame_tag nested_dom_id('button_like', likeable) do
       model_name = likeable.model_name.singular_route_key
 
