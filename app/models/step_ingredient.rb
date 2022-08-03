@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class StepsIngredient < ApplicationRecord
+class StepIngredient < ApplicationRecord
   belongs_to :step
   belongs_to :ingredient
 

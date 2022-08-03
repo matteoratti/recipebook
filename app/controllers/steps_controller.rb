@@ -43,6 +43,6 @@ class StepsController < ApplicationController
   end
 
   def step_params
-    params.require(:step).permit(:description, :order, :body, :duration, steps_ingredients_attributes: %i[ingredient_id quantity])
+    params.require(:step).permit(:description, :order, :body, :duration, steps_ingredients_attributes: %i[step_id ingrendient_id quantity ingrendients_attributes ])
   end
 end

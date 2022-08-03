@@ -1,9 +1,36 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+parmiggiano:
+  name: parmiggiano
+  unit_type: g
+
+burro:
+  name: burro
+  unit_type: g
+
+farina:
+  name: farina
+  unit_type: g
+
+pasta:
+  name: pasta
+  unit_type: g
+
+latte:
+  name: latte
+  unit_type: ml
+
+acqua:
+  name: acqua
+  unit_type: ml
+
+aceto:
+  name: aceto
+  unit_type: ml
+
+panna:
+  name: panna
+  unit_type: ml
 
 uova:
   name: uova
-  unit_type: 2
-
-parmiggiano:
-  name: parmiggiano
-  unit_type: 1
+  unit_type: unit
