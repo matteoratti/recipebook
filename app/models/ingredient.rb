@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Ingredient < ApplicationRecord
-  has_many :recipes_ingredients, dependent: :destroy
-  has_many :recipes, through: :recipes_ingredients
+  has_many :steps_ingredients, dependent: :destroy
+  has_many :steps, through: :steps_ingredients
 
   has_many :tags, as: :taggable, dependent: :destroy
 

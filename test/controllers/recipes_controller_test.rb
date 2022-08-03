@@ -48,14 +48,6 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to recipes_url
   end
 
-  test 'should destroy recipe ingredients when destroy recipe' do
-    assert_difference('RecipesIngredient.count', -1) do
-      delete recipe_url(@recipe)
-    end
-
-    assert_redirected_to recipes_url
-  end
-
   test 'invalid if missing :presence validation' do
     params = { recipe: { body: @recipe.body, name: @recipe.name } } # TODO: should be created dynamically
 
@@ -85,27 +77,6 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
   test 'invalid recipe update' do
     patch recipe_url(@recipe), params: { recipe: { body: @recipe.body, name: nil } }
     assert_response 422
-  end
-
-  test 'create a recipe with recipe ingredients' do
-    ingredient1 = ingredients(:uova)
-    ingredient2 = ingredients(:parmiggiano)
-    recipe_ingredients = [
-      { ingredient_id: ingredient1.id, quantity: 1 },
-      { ingredient_id: ingredient2.id, quantity: 4 }
-    ]
-
-    assert_difference('Recipe.count') do
-      post recipes_url,
-           params: { recipe: { body: @recipe.body, name: @recipe.name,
-                               recipes_ingredients_attributes: recipe_ingredients } }
-    end
-
-    assert_equal recipe_ingredients[0],
-                 Recipe.last.recipes_ingredients.first.attributes.symbolize_keys
-                       .except(:id, :created_at, :updated_at, :recipe_id, :ingredient_name, :recipe_name)
-
-    assert_redirected_to recipe_url(Recipe.last)
   end
 
   test 'create a recipe with steps' do

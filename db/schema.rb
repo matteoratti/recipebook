@@ -68,18 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_130859) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "recipes_ingredients", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "ingredient_id", null: false
-    t.integer "quantity"
-    t.string "ingredient_name"
-    t.string "recipe_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_recipes_ingredients_on_ingredient_id"
-    t.index ["recipe_id"], name: "index_recipes_ingredients_on_recipe_id"
-  end
-
   create_table "steps", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.string "description"
@@ -89,6 +77,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_130859) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_steps_on_recipe_id"
+  end
+
+  create_table "steps_ingredients", force: :cascade do |t|
+    t.bigint "step_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.integer "quantity"
+    t.string "ingredient_name"
+    t.string "step_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_steps_ingredients_on_ingredient_id"
+    t.index ["step_id"], name: "index_steps_ingredients_on_step_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -123,7 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_130859) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "likes", "users"
-  add_foreign_key "recipes_ingredients", "ingredients"
-  add_foreign_key "recipes_ingredients", "recipes"
   add_foreign_key "steps", "recipes"
+  add_foreign_key "steps_ingredients", "ingredients"
+  add_foreign_key "steps_ingredients", "steps"
 end

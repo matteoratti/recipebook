@@ -1,15 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  recipe: carbonara
+step_ingredient_one:
+  step: one
   ingredient: uova
   quantity: 3
   ingredient_name: uova
-  recipe_name: carbonara
+  step_description: bollire la pasta
 
-two:
-  recipe: amatriciana
+step_ingredient_two:
+  step: two
   ingredient: parmiggiano
   quantity: 300
   ingredient_name: parmiggiano
-  recipe_name: amatriciana
+  step_description: friggere la pancetta
