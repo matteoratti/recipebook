@@ -5,6 +5,7 @@ require 'test_helper'
 class LikeTest < ActiveSupport::TestCase
   def setup
     @user1_likes_recipe1 = Like.new(user: users(:user1), likeable: recipes(:carbonara))
+    @user1_likes_step1 = Like.new(user: users(:user1), likeable: steps(:one))
   end
 
   test 'assert a valid like' do
@@ -40,5 +41,14 @@ class LikeTest < ActiveSupport::TestCase
     assert_not user1_likes_recipe1_again.save
 
     assert_equal ['User already liked this resource'], user1_likes_recipe1_again.errors.full_messages
+  end
+
+  test 'user should give one like to one step' do
+    @user1_likes_step1.save
+
+    user1_likes_step1_again = Like.new(user: users(:user1), likeable: steps(:one))
+    assert_not user1_likes_step1_again.save
+
+    assert_equal ['User already liked this resource'], user1_likes_step1_again.errors.full_messages
   end
 end
