@@ -3,9 +3,6 @@
 class Recipe < ApplicationRecord
   enum status: { draft: 0, published: 1, archived: 2 }
 
-  has_many :recipes_ingredients, dependent: :destroy
-  has_many :ingredients, through: :recipes_ingredients
-
   has_many :steps, dependent: :destroy
   has_many :tags, as: :taggable, dependent: :destroy
 
@@ -23,5 +20,5 @@ class Recipe < ApplicationRecord
 
   validates :name, :body, presence: true
 
-  accepts_nested_attributes_for :steps, :recipes_ingredients, :tags
+  accepts_nested_attributes_for :steps, :tags
 end

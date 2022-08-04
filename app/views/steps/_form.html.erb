@@ -22,6 +22,15 @@
       </div>
 
 
+
+      <%= step_field.fields_for :steps_ingredient do |step_ingrendient_field| %>
+        <%= step_ingrendient_field.number_field :quantity %>
+
+        <%= step_ingrendient_field.fields_for :ingredients do |i| %>
+          <%= i.text_field :name %>
+        <% end %>
+      <% end %>
+
       <div class="d-flex justify-content-between align-items-center my-3">
           <%= step_field.submit class: "btn btn-success" %>
           <%= link_to "Cancel", @recipe, class: "btn btn-danger" %>
