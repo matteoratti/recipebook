@@ -17,15 +17,19 @@
 </section>
 
 <div class="container">
-  <h3 class="m-0">Steps</h3>
 
-  <div class="album py-5">
+  <%= turbo_frame_tag nested_dom_id(@recipe, 'recipe_ingredients') do %>
+    <%= render "recipe_ingredients", recipe_ingredients: @recipe_ingredients%>
+  <% end %>
+
+  <h3 class="py-3">Steps</h3>
+  <div class="album">
     <%= render @recipe %>
   </div>
   <%= link_to "Add New Step",
               [:new, @recipe, :step],
               data: { turbo_frame: nested_dom_id(@recipe, Step.new) },
-              class: "btn btn-primary" %>
+              class: "btn btn-primary my-5" %>
 </div>
 
 

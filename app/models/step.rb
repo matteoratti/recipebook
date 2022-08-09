@@ -11,4 +11,16 @@ class Step < ApplicationRecord
   validates :description, :body, :order, presence: true
 
   accepts_nested_attributes_for :step_ingredients
+
+  scope :with_step_ingredients, -> { includes(:step_ingredients) }
+
+  before_save :find_or_create_ingredients
+
+  def find_or_create_ingredients
+    step_ingredients.each do |step_ingredient|
+      step_ingredient.ingredient = Ingredient.find_or_create_by(name: step_ingredient.ingredient.name) do |ingredient|
+        ingredient.unit_type = step_ingredient.ingredient.unit_type
+      end
+    end
+  end
 end

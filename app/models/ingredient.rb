@@ -11,4 +11,8 @@ class Ingredient < ApplicationRecord
   validates :name, :unit_type, presence: true
 
   enum unit_type: { ml: 0, g: 1, unit: 2 }
+
+  scope :ingredients_from_search, lambda { |search|
+    Ingredient.where('name LIKE ?', "%#{search}%")
+  }
 end

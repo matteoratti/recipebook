@@ -44,4 +44,26 @@ class StepTest < ActiveSupport::TestCase
     @step.recipe = nil
     assert_not @step.valid?
   end
+
+  test 'if step associated ingredient does not exists, create it' do
+    ingredient = Ingredient.new(name: 'a new ingredient', unit_type: 'ml')
+
+    assert_not Ingredient.find_by_name(ingredient.name)
+
+    @step.step_ingredients.build({ step: @step, ingredient: ingredient, quantity: 10 })
+    @step.save
+
+    assert Ingredient.find_by_name(ingredient.name)
+  end
+
+  test 'if step associated ingredient does exists, find it' do
+    ingredient = ingredients(:uova)
+
+    assert Ingredient.find(ingredient.id)
+
+    @step.step_ingredients.build({ step: @step, ingredient: ingredient, quantity: 10 })
+    @step.save
+
+    assert @step.step_ingredients.first.ingredient.id == ingredient.id
+  end
 end

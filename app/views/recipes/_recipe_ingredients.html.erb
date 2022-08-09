@@ -1,0 +1,23 @@
+<% unless recipe_ingredients.num_tuples.zero? %>
+  <div class="row">
+    <div class="col-5">
+      <h3 class="py-3">Ingredients List</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Ingredient name</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% recipe_ingredients.each do |ingredient| %>
+            <tr>
+              <td><%= ingredient["name"] %></td>
+              <td><%= ingredient["sum"] %> <%= Ingredient.unit_types.keys[ingredient["unit_type"]] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

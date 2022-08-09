@@ -1,7 +1,7 @@
 <%= turbo_frame_tag recipe do %>
   <!-- recipe steps list -->
   <%= turbo_frame_tag nested_dom_id(recipe, "steps"), class:"row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" do %>
-    <%= render recipe.steps, recipe: recipe %>
+    <%= render recipe.steps.with_step_ingredients, recipe: recipe %>
   <% end %>
 
   <!-- form -->

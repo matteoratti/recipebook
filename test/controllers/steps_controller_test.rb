@@ -6,6 +6,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @step = steps(:one)
     @recipe = @step.recipe
+    @step_ingredients = StepIngredient.create(step: @step, ingredient: ingredients(:uova), quantity: 5)
   end
 
   test 'should get new' do
@@ -43,7 +44,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
-  test 'should update recipe' do
+  test 'should update a step' do
     new_params = { step: {
       description: 'new step description',
       order:       2,
@@ -83,7 +84,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should destroy step ingredients when destroy step' do
-    assert_difference('StepsIngredient.count', -1) do
+    assert_difference('StepIngredient.count', -1) do
       delete recipe_step_url(@recipe, @step)
     end
 
@@ -92,28 +93,50 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
 
   test 'create a step with step ingredients' do
     ingredient1 = ingredients(:uova)
-    ingredient2 = ingredients(:parmiggiano)
-    step_ingredients = [
-      { ingredient_id: ingredient1.id, quantity: 1 },
-      { ingredient_id: ingredient2.id, quantity: 4 }
-    ]
 
     params = { step: {
-      description:                  'step description',
-      order:                        1,
-      body:                         'step body',
-      duration:                     120,
-      steps_ingredients_attributes: step_ingredients
+      description:                 'step description',
+      order:                       1,
+      duration:                    120,
+      body:                        'step body',
+      step_ingredients_attributes: { '0' => { quantity: 10, ingredient_attributes: { name: ingredient1.name, unit_type: ingredient1.unit_type } } }
     } }
 
     assert_difference('Step.count') do
       post recipe_steps_url(@recipe), params: params
     end
 
-    assert_equal step_ingredients[0],
-                 Step.last.steps_ingredients.first.attributes.symbolize_keys
-                     .except(:id, :created_at, :updated_at, :recipe_id, :step_id, :ingredient_name, :step_description)
+    assert_equal params[:step][:step_ingredients_attributes]['0'][:ingredient_attributes][:name],
+                 Step.last.step_ingredients.first.attributes.symbolize_keys
+                     .except(:id, :created_at, :updated_at, :recipe_id, :step_id, :ingredient_id, :quantity, :step_description)[:ingredient_name]
+
+    assert_equal params[:step][:step_ingredients_attributes]['0'][:quantity],
+                 Step.last.step_ingredients.first.attributes.symbolize_keys
+                     .except(:id, :created_at, :updated_at, :recipe_id, :step_id, :ingredient_id, :ingredient_name, :step_description)[:quantity]
 
     assert_response 200
+  end
+
+  test 'update a step with step ingredients' do
+    new_params = { step: {
+      description:                 'new step description',
+      order:                       3,
+      duration:                    10,
+      body:                        'new step body',
+      step_ingredients_attributes: { '0' => { quantity: 10, ingredient_attributes: { name: 'new ingredient name', unit_type: 'ml' } } }
+    } }
+
+    patch recipe_step_url(@recipe, @step), params: new_params
+
+    @step.reload
+
+    assert_equal new_params[:step][:step_ingredients_attributes]['0'][:ingredient_attributes][:name],
+                 @step.step_ingredients.last.attributes.symbolize_keys.except(:id, :created_at, :updated_at, :recipe_id, :step_id, :ingredient_id, :quantity, :step_description)[:ingredient_name]
+
+    assert_equal new_params[:step][:step_ingredients_attributes]['0'][:quantity],
+                 @step.step_ingredients.last.attributes.symbolize_keys
+                      .except(:id, :created_at, :updated_at, :recipe_id, :step_id, :ingredient_id, :ingredient_name, :step_description)[:quantity]
+
+    assert_response :success
   end
 end

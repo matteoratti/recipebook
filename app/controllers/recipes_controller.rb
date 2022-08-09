@@ -5,11 +5,13 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.with_image
+    @recipes = Recipe.with_image.with_steps
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    @recipe_ingredients = @recipe.recipe_step_ingredients
+  end
 
   # GET /recipes/new
   def new
