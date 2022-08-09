@@ -1,0 +1,99 @@
+---
+openapi: 3.0.1
+info:
+  title: RECIPE BOOK V1
+  version: v1
+  description: This is the first version of Recipebook project API
+paths:
+  "/recipes.json":
+    get:
+      summary: Get all recipes
+      tags:
+      - Recipes
+      - index
+      responses:
+        '200':
+          description: Recipes found
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                - id:
+                    type: integer
+                  name:
+                    type: string
+                  body:
+                    type: string
+                - id:
+                    type: integer
+                  name:
+                    type: string
+                  body:
+                    type: string
+        '404':
+          description: recipe not found
+        '406':
+          description: unsupported accept header
+  "/recipes":
+    post:
+      summary: Create a recipe
+      tags:
+      - Recipes
+      parameters: []
+      responses:
+        '201':
+          description: recipe created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                body:
+                  type: string
+              required:
+              - name
+  "/recipes/{id}":
+    get:
+      summary: Retrieves a recipe
+      tags:
+      - Recipes
+      - show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: blog found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+        '404':
+          description: recipe not found
+        '406':
+          description: unsupported accept header
+servers:
+- url: https://localhost:3000
+  variables:
+    defaultHost:
+      default: https://localhost:3000
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
