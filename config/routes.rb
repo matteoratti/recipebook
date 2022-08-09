@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :steps
   end
 
+  get '/autocomplete', to: 'ingredients#autocomplete'
+
   resources :steps, concerns: %i[likeable], only: %i[]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

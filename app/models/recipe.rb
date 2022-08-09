@@ -21,4 +21,15 @@ class Recipe < ApplicationRecord
   validates :name, :body, presence: true
 
   accepts_nested_attributes_for :steps, :tags
+
+  def recipe_step_ingredients
+    sql = "
+      SELECT SUM(step_ingredients.quantity), ingredients.unit_type, ingredients.name
+      FROM step_ingredients
+      INNER JOIN ingredients
+      ON step_ingredients.ingredient_id = ingredients.id
+      GROUP BY ingredients.unit_type, ingredients.name
+    "
+    ActiveRecord::Base.connection.execute(sql)
+  end
 end

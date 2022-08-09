@@ -1,5 +1,5 @@
 <%= form_with(model: step, url: [recipe, step]) do |step_field| %>
-  <div class="card shadow-sm col-4 my-3">
+  <div class="card shadow-sm col-5 my-3">
     <div class="card-body">
 
       <div class="row my-3">
@@ -21,14 +21,28 @@
         </div>
       </div>
 
+      <div class="row my-3">
+        <small>Choose an Ingredient</small>
+      </div>
 
+      <%= step_field.fields_for :step_ingredients do |step_ingredients_fields| %>
+        <div class="row my-3">
+          <%= step_ingredients_fields.fields_for :ingredient do |ingredient_form| %>
+            <div class="col">
+              <div data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="/autocomplete">
+                <%= ingredient_form.text_field :name, data:{"autocomplete-target" => "input"}, placeholder: "ingredient", class: "form-control" %>
+                <ul class="p-0 border-bottom border-start border-end rounded-bottom" data-autocomplete-target="results"></ul>
+              </div>
+            </div>
 
-      <%= step_field.fields_for :steps_ingredient do |step_ingrendient_field| %>
-        <%= step_ingrendient_field.number_field :quantity %>
-
-        <%= step_ingrendient_field.fields_for :ingredients do |i| %>
-          <%= i.text_field :name %>
-        <% end %>
+            <div class="col">
+              <div class="input-group">
+                  <%= step_ingredients_fields.number_field :quantity, placeholder: "quantity", class: "form-control" %>
+                  <%= ingredient_form.select :unit_type, Ingredient.unit_types.keys, {}, {class: "btn btn-outline-secondary dropdown-toggle"} %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
 
       <div class="d-flex justify-content-between align-items-center my-3">

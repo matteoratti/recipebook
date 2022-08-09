@@ -6,6 +6,7 @@ class StepsController < ApplicationController
 
   def new
     @step = Step.new
+    @step.step_ingredients.build.build_ingredient
   end
 
   def edit; end
@@ -43,6 +44,9 @@ class StepsController < ApplicationController
   end
 
   def step_params
-    params.require(:step).permit(:description, :order, :body, :duration, steps_ingredients_attributes: %i[step_id ingrendient_id quantity ingrendients_attributes ])
+    params.require(:step).permit(:description, :body, :order, :duration,
+                                 step_ingredients_attributes: [:id, :quantity, {
+                                   ingredient_attributes: %i[name unit_type]
+                                 }])
   end
 end

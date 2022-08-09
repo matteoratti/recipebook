@@ -8,6 +8,8 @@ class StepIngredient < ApplicationRecord
 
   validates :step_description, :ingredient_name, presence: true
 
+  accepts_nested_attributes_for :ingredient
+
   private
 
   def set_step_description

@@ -280,6 +280,11 @@ sass@^1.53.0:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
+stimulus-autocomplete@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/stimulus-autocomplete/-/stimulus-autocomplete-3.0.2.tgz#24db95b0990c2272e11ef30ff2cee6ed05878558"
+  integrity sha512-8bluCHjz1cgPHu/V0OKhRrGG6V2ordFC+aQwYLJ0U0cRZCq8j10Z6j+DFTsDirFl7NO9iPL1j2z0/CUxeXw2gw==
+
 to-regex-range@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-5.0.1.tgz#1648c44aae7c8d988a326018ed72f5b4dd0392e4"

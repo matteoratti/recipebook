@@ -20,7 +20,17 @@
       </div>
       <h4><%= step.description %></h4>
       <p class="card-text"><%= step.body %></p>
-      <small class="text-muted"><%= step.duration %> min</small>
+      <div class="row">
+        <% step.step_ingredients.each do |step_ingredient| %>
+          <div class="col-7">
+            Ingredient:
+            <%= step_ingredient.ingredient_name %>
+            <%= step_ingredient.quantity %>
+            <%= step_ingredient.ingredient.unit_type %>
+          </div>
+        <% end %>
+      <small class="text-muted mt-3"><%= step.duration %> min</small>
+     </div>
     </div>
   </div>
 <% end %>
