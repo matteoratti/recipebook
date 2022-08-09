@@ -77,7 +77,7 @@ class RecipeTest < ActiveSupport::TestCase
 
     assert_not recipe_ingredients.uniq!
 
-    burro_ingredient = recipe_ingredients.find {|x| x['name'] == 'burro'}
+    burro_ingredient = recipe_ingredients.find { |x| x['name'] == 'burro' }
     assert_equal burro_ingredient['sum'], 40
   end
 end

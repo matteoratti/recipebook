@@ -139,4 +139,30 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test 'add step ingredient during new step' do
+    params = { step: {
+      description: 'step description',
+      order:       1,
+      body:        'step body',
+      duration:    120
+    } }
+
+    post add_ingredient_recipe_steps_path(@recipe), params: params
+
+    assert_response :success
+  end
+
+  test 'add step ingredient during existing step' do
+    params = { step: {
+      description: 'step description',
+      order:       1,
+      body:        'step body',
+      duration:    120
+    } }
+
+    post add_ingredient_recipe_steps_path(@recipe, id: @step.id), params: params
+
+    assert_response :success
+  end
 end
