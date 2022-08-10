@@ -33,9 +33,14 @@ class StepsController < ApplicationController
   end
 
   def add_ingredient
-    params[:id] ? set_step : @step = Step.new(step_params.merge({ id: params[:id] }))
+    if params[:id]
+      set_step
+      @step.assign_attributes(step_params)
 
-    @step.update(step_params)
+    else
+      @step = Step.new(step_params.merge({ id: params[:id] }))
+    end
+
     @step.step_ingredients.build.build_ingredient
 
     render :edit
