@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :recipes, concerns: %i[image_deletable likeable] do
-    resources :steps
+    resources :steps do
+      post :add_ingredient, on: :collection
+    end
   end
 
   get '/autocomplete', to: 'ingredients#autocomplete'

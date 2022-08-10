@@ -6,7 +6,6 @@ class StepsController < ApplicationController
 
   def new
     @step = Step.new
-    @step.step_ingredients.build.build_ingredient
   end
 
   def edit; end
@@ -33,6 +32,20 @@ class StepsController < ApplicationController
     render formats: :turbo_stream if @step.destroy
   end
 
+  def add_ingredient
+    if params[:id]
+      set_step
+      @step.assign_attributes(step_params)
+
+    else
+      @step = Step.new(step_params.merge({ id: params[:id] }))
+    end
+
+    @step.step_ingredients.build.build_ingredient
+
+    render :edit
+  end
+
   private
 
   def set_recipe
@@ -45,7 +58,7 @@ class StepsController < ApplicationController
 
   def step_params
     params.require(:step).permit(:description, :body, :order, :duration,
-                                 step_ingredients_attributes: [:id, :quantity, {
+                                 step_ingredients_attributes: [:_destroy, :id, :quantity, {
                                    ingredient_attributes: %i[name unit_type]
                                  }])
   end

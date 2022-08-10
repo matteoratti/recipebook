@@ -25,25 +25,12 @@
         <small>Choose an Ingredient</small>
       </div>
 
-      <%= step_field.fields_for :step_ingredients do |step_ingredients_fields| %>
-        <div class="row my-3">
-          <%= step_ingredients_fields.fields_for :ingredient do |ingredient_form| %>
-            <div class="col">
-              <div data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="/autocomplete">
-                <%= ingredient_form.text_field :name, data:{"autocomplete-target" => "input"}, placeholder: "ingredient", class: "form-control" %>
-                <ul class="p-0 border-bottom border-start border-end rounded-bottom" data-autocomplete-target="results"></ul>
-              </div>
-            </div>
 
-            <div class="col">
-              <div class="input-group">
-                  <%= step_ingredients_fields.number_field :quantity, placeholder: "quantity", class: "form-control" %>
-                  <%= ingredient_form.select :unit_type, Ingredient.unit_types.keys, {}, {class: "btn btn-outline-secondary dropdown-toggle"} %>
-              </div>
-            </div>
-          <% end %>
-        </div>
+      <%= step_field.fields_for :step_ingredients do |step_ingredients_fields| %>
+          <%= render "step_ingredient_form", step_ingredients_fields: step_ingredients_fields %>
       <% end %>
+
+      <%= step_field.button "Add ingredient", class:'btn btn-sm btn-primary', formmethod: "post", formaction: add_ingredient_recipe_steps_path(@recipe, id: step.id), data: { turbo_frame: false} %>
 
       <div class="d-flex justify-content-between align-items-center my-3">
           <%= step_field.submit class: "btn btn-success" %>
