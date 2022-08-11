@@ -52,7 +52,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
       duration:    240
     } }
 
-    patch recipe_step_url(@recipe, @step), params: new_params
+    patch step_url(@step), params: new_params
 
     @step.reload
 
@@ -70,14 +70,14 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
       duration:    nil
     } }
 
-    patch recipe_step_url(@recipe, @step), params: new_params
+    patch step_url(@step), params: new_params
 
     assert_response :unprocessable_entity
   end
 
   test 'should destroy a step' do
     assert_difference('Step.count', -1) do
-      delete recipe_step_url(@recipe, @step)
+      delete step_url(@step)
     end
 
     assert_response :success
@@ -85,7 +85,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should destroy step ingredients when destroy step' do
     assert_difference('StepIngredient.count', -1) do
-      delete recipe_step_url(@recipe, @step)
+      delete step_url(@step)
     end
 
     assert_response :success
@@ -126,7 +126,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
       step_ingredients_attributes: { '0' => { quantity: 10, ingredient_attributes: { name: 'new ingredient name', unit_type: 'ml' } } }
     } }
 
-    patch recipe_step_url(@recipe, @step), params: new_params
+    patch step_url(@step), params: new_params
 
     @step.reload
 
@@ -136,32 +136,6 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
     assert_equal new_params[:step][:step_ingredients_attributes]['0'][:quantity],
                  @step.step_ingredients.last.attributes.symbolize_keys
                       .except(:id, :created_at, :updated_at, :recipe_id, :step_id, :ingredient_id, :ingredient_name, :step_description)[:quantity]
-
-    assert_response :success
-  end
-
-  test 'add step ingredient during new step' do
-    params = { step: {
-      description: 'step description',
-      order:       1,
-      body:        'step body',
-      duration:    120
-    } }
-
-    post add_ingredient_recipe_steps_path(@recipe), params: params
-
-    assert_response :success
-  end
-
-  test 'add step ingredient during existing step' do
-    params = { step: {
-      description: 'step description',
-      order:       1,
-      body:        'step body',
-      duration:    120
-    } }
-
-    post add_ingredient_recipe_steps_path(@recipe, id: @step.id), params: params
 
     assert_response :success
   end

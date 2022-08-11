@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
+  before_action :set_user, only: %i[index new edit create destroy]
   before_action :set_recipe, only: %i[show edit update destroy add_step delete_image]
 
   # GET /recipes or /recipes.json
@@ -23,7 +24,7 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = @user.recipes.build(recipe_params)
 
     if @recipe.save
       redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.'
@@ -45,7 +46,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
 
-    redirect_to recipes_url, notice: 'Recipe was successfully destroyed.'
+    redirect_to user_recipes_url(@user), notice: 'Recipe was successfully destroyed.'
   end
 
   def delete_image
@@ -59,6 +60,10 @@ class RecipesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
     @recipe = Recipe.find(params[:id])
+  end
+
+  def set_user
+    @user ||= User.first
   end
 
   # Only allow a list of trusted parameters through.

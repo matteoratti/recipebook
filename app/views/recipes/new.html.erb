@@ -2,6 +2,6 @@
 <div class="container mt-4">
   <h1>New recipe</h1>
 
-  <%= render "form", recipe: @recipe %>
-  <%= link_to "Back to recipes", recipes_path %>
+  <%= render "form", params: [@user, Recipe.new], recipe: @recipe %>
+  <%= link_to "Cancel", user_recipes_path(@user, @recipe), class: "btn btn-danger mt-3" %>
 </div>

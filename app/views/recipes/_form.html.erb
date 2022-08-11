@@ -3,7 +3,7 @@
   <%= button_to "delete current image", delete_image_recipe_path, class: "btn btn-outline-danger my-3", method: :delete %>
 <% end %> 
 
-<%= form_with(model: recipe, class: "inline-edit-form") do |form| %>
+<%= form_with(model: params, class: "inline-edit-form") do |form| %>
   <% if recipe.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
@@ -22,7 +22,6 @@
       <%= form.text_area :body, placeholder: "Body", class: "form-control edit-body" %>
       <%= form.file_field :image %>
       <%= form.submit :class => "btn btn-primary mt-3" %>
-      <%= link_to "Cancel", recipe, class: "btn btn-danger mt-3" %>
     </div>
   </div>
 <% end %>

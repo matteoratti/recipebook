@@ -4,7 +4,8 @@ require 'test_helper'
 
 class RecipeTest < ActiveSupport::TestCase
   def setup
-    @recipe = Recipe.new(name: 'carbonara', body: 'si fa con le uova')
+    @user = users(:user1)
+    @recipe = Recipe.new(user: @user, name: 'carbonara', body: 'si fa con le uova')
   end
 
   test 'valid recipe' do
@@ -41,6 +42,8 @@ class RecipeTest < ActiveSupport::TestCase
       next unless v.kind == :presence
 
       v.attributes.each do |attr|
+        next if attr == :user
+
         @recipe[attr] = nil
         assert_not @recipe.save
       end
@@ -71,5 +74,13 @@ class RecipeTest < ActiveSupport::TestCase
     recipe1_step_ingredients = recipe1.recipe_step_ingredients
 
     assert_not(recipe1_step_ingredients.any? { |el| el['name'] == recipe2_ingredient.name })
+  end
+
+  test 'create a recipe with an user' do
+    recipe1 = Recipe.create(user: @user, name: 'pesto', body: 'pesto body')
+    recipe2 = Recipe.create(user: @user, name: 'frittata', body: 'pesto body')
+
+    assert(@user.recipes.any? { |recipe| recipe['id'] == recipe1.id })
+    assert(@user.recipes.any? { |recipe| recipe['id'] == recipe2.id })
   end
 end

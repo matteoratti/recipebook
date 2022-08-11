@@ -4,22 +4,23 @@ require 'test_helper'
 
 class RecipesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user = users(:user1)
     @recipe = recipes(:carbonara)
   end
 
   test 'should get index' do
-    get recipes_url
+    get user_recipes_url(@user)
     assert_response :success
   end
 
   test 'should get new' do
-    get new_recipe_url
+    get new_user_recipe_url(@user)
     assert_response :success
   end
 
   test 'should create recipe' do
     assert_difference('Recipe.count') do
-      post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name } }
+      post user_recipes_url(@user), params: { recipe: { body: @recipe.body, name: @recipe.name } }
     end
 
     assert_redirected_to recipe_url(Recipe.last)
@@ -45,30 +46,12 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
       delete recipe_url(@recipe)
     end
 
-    assert_redirected_to recipes_url
-  end
-
-  test 'invalid if missing :presence validation' do
-    params = { recipe: { body: @recipe.body, name: @recipe.name } } # TODO: should be created dynamically
-
-    Recipe.validators.each do |v|
-      next unless v.kind == :presence
-
-      v.attributes.each do |attr|
-        params[:recipe][attr] = nil
-
-        assert_no_difference('Recipe.count') do
-          post recipes_url, params: params
-        end
-
-        assert_response 422
-      end
-    end
+    assert_redirected_to user_recipes_url(@user)
   end
 
   test 'invalid recipe creation' do
     assert_no_difference('Recipe.count') do
-      post recipes_url, params: { recipe: { body: @recipe.body, name: nil } }
+      post user_recipes_url(@user), params: { recipe: { body: @recipe.body, name: nil } }
     end
 
     assert_response 422
@@ -86,7 +69,7 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     ]
 
     assert_difference('Recipe.count') do
-      post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, steps_attributes: steps } }
+      post user_recipes_url(@user), params: { recipe: { body: @recipe.body, name: @recipe.name, steps_attributes: steps } }
     end
 
     assert_equal steps[0],
@@ -101,7 +84,7 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     ]
 
     assert_difference('Recipe.count') do
-      post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, tags_attributes: tags } }
+      post user_recipes_url(@user), params: { recipe: { body: @recipe.body, name: @recipe.name, tags_attributes: tags } }
     end
 
     assert_equal tags[0][:name], Recipe.last.tags.first.name
@@ -110,14 +93,14 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
 
   test 'create a recipe with an image' do
     assert_difference('Recipe.count') do
-      post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
+      post user_recipes_url(@user), params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
     end
 
     assert Recipe.last.image.attached?
   end
 
   test 'delete only recipe image' do
-    post recipes_url, params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
+    post user_recipes_url(@user), params: { recipe: { body: @recipe.body, name: @recipe.name, image: fixture_file_upload('pesto.jpg', 'fixtures/files') } }
 
     delete delete_image_recipe_path(Recipe.last)
 

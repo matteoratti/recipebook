@@ -1,4 +1,4 @@
-<%= turbo_stream.remove nested_dom_id(@recipe, @step)%>
+<%= turbo_stream.remove nested_dom_id(@step)%>
 
 <%= turbo_stream.update nested_dom_id(@recipe, "recipe_ingredients") do %>
    <%= render "recipes/recipe_ingredients", recipe_ingredients: @recipe.recipe_step_ingredients %>

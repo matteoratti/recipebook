@@ -3,6 +3,8 @@
 class Recipe < ApplicationRecord
   enum status: { draft: 0, published: 1, archived: 2 }
 
+  belongs_to :user
+
   has_many :steps, dependent: :destroy
   has_many :tags, as: :taggable, dependent: :destroy
 

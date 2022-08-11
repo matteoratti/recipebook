@@ -1,17 +1,17 @@
-<%= turbo_frame_tag(nested_dom_id(recipe, step), class:"col-4") do %>
+<%= turbo_frame_tag(nested_dom_id(step), class:"col-4") do %>
 
   <div class="card shadow-sm">
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center">
         <small class="text-muted"><%= step.order %>.</small>
         <div class="d-flex gap-2">
-          <%= link_to [:edit,recipe, step],
-                      data: { turbo_frame: nested_dom_id(recipe, Step.new) },
+          <%= link_to [:edit, step],
+                      data: { turbo_frame: nested_dom_id("new_step") },
                       class: "btn btn-sm btn-outline-secondary" do %>
                       <i class="bi bi-pencil-square"></i>
           <% end %>
           <%= button_to raw("<i class=\"bi bi-trash-fill\"></i>"),
-                        [recipe, step],
+                        [step],
                         method: :delete,
                         class: "btn btn-sm btn-outline-danger" %>
           <%= like_element(step) %>
