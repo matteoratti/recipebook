@@ -58,30 +58,22 @@ class RecipeTest < ActiveSupport::TestCase
     assert_empty @recipe.tags
   end
 
-  test 'get recipe ingredient list with no duplications and sum quantity' do
-    step_ingredient_1 = StepIngredient.create(step: steps(:one), ingredient: ingredients(:uova), quantity: 5)
-    step_ingredient_2 = StepIngredient.create(step: steps(:two), ingredient: ingredients(:burro), quantity: 10)
+  test 'query must returns only recipe ingredients from recipe steps' do
+    # recipe pesto
+    recipe1 = Recipe.create(name: 'pesto', body: 'pesto body')
+    recipe1_step1 = Step.create(recipe: recipe1, description: 'aggiungere basilico', order: 1, body: 'recipe1 step1 body', duration: 10)
+    recipe1_ingredient = Ingredient.create(name: 'basilico', unit_type: :g)
+    StepIngredient.create(step: recipe1_step1, ingredient: recipe1_ingredient, quantity: 10)
 
-    StepIngredient.create(step: steps(:two), ingredient: ingredients(:burro), quantity: 30)
+    # recipe ragu
+    recipe2 = Recipe.create(name: 'ragu', body: 'ragu body')
+    recipe2_step1 = Step.create(recipe: recipe2, description: 'aggiungere manzo', order: 1, body: 'recipe 2 step1 body', duration: 20)
+    recipe2_ingredient = Ingredient.create(name: 'manzo', unit_type: :g)
+    StepIngredient.create(step: recipe2_step1, ingredient: recipe2_ingredient, quantity: 20)
 
-    Step.create(recipe: @recipe, description: 'sbattere le uova', order: 1, body: 'this is a body', duration: 1200)
-    Step.create(recipe: @recipe, description: 'aggiungere burro', order: 2, body: 'this is a burro', duration: 10)
+    recipe1_step_ingredients = recipe1.recipe_step_ingredients
 
-    # new step with same ingredient
-    Step.create(recipe: @recipe, description: 'aggiungere burro', order: 2, body: 'this is a burro', duration: 10)
-
-    assert @recipe.recipe_step_ingredients.instance_of? PG::Result
-    assert_not @recipe.recipe_step_ingredients.num_tuples.zero?
-
-    assert_equal step_ingredient_1.ingredient.name, 'uova'
-    assert_equal step_ingredient_2.ingredient.name, 'burro'
-
-    recipe_ingredients = @recipe.recipe_step_ingredients.to_a
-
-    assert_not recipe_ingredients.uniq!
-
-    burro_ingredient = recipe_ingredients.find { |x| x['name'] == 'burro' }
-    assert_equal burro_ingredient['sum'], 40
+    assert_not(recipe1_step_ingredients.any? { |el| el['name'] == recipe2_ingredient.name })
   end
 
   test 'create a recipe with an user' do

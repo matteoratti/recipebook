@@ -25,13 +25,17 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :steps, :tags
 
   def recipe_step_ingredients
+    return if steps.empty?
+
+    ids = steps.ids
     sql = "
       SELECT SUM(step_ingredients.quantity), ingredients.unit_type, ingredients.name
       FROM step_ingredients
       INNER JOIN ingredients
       ON step_ingredients.ingredient_id = ingredients.id
+      WHERE step_ingredients.step_id IN (#{ids.join(',')})
       GROUP BY ingredients.unit_type, ingredients.name
     "
-    ActiveRecord::Base.connection.execute(sql)
+    ActiveRecord::Base.connection.exec_query(sql)
   end
 end
