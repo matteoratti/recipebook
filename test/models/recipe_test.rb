@@ -4,7 +4,8 @@ require 'test_helper'
 
 class RecipeTest < ActiveSupport::TestCase
   def setup
-    @recipe = Recipe.new(name: 'carbonara', body: 'si fa con le uova')
+    @user = users(:user1)
+    @recipe = Recipe.new(user: @user, name: 'carbonara', body: 'si fa con le uova')
   end
 
   test 'valid recipe' do
@@ -41,6 +42,8 @@ class RecipeTest < ActiveSupport::TestCase
       next unless v.kind == :presence
 
       v.attributes.each do |attr|
+        next if attr == :user
+
         @recipe[attr] = nil
         assert_not @recipe.save
       end
@@ -55,7 +58,7 @@ class RecipeTest < ActiveSupport::TestCase
     assert_empty @recipe.tags
   end
 
-  test 'get recipe ingredient list' do
+  test 'get recipe ingredient list with no duplications and sum quantity' do
     step_ingredient_1 = StepIngredient.create(step: steps(:one), ingredient: ingredients(:uova), quantity: 5)
     step_ingredient_2 = StepIngredient.create(step: steps(:two), ingredient: ingredients(:burro), quantity: 10)
 
@@ -79,5 +82,13 @@ class RecipeTest < ActiveSupport::TestCase
 
     burro_ingredient = recipe_ingredients.find { |x| x['name'] == 'burro' }
     assert_equal burro_ingredient['sum'], 40
+  end
+
+  test 'create a recipe with an user' do
+    recipe1 = Recipe.create(user: @user, name: 'pesto', body: 'pesto body')
+    recipe2 = Recipe.create(user: @user, name: 'frittata', body: 'pesto body')
+
+    assert(@user.recipes.any? { |recipe| recipe['id'] == recipe1.id })
+    assert(@user.recipes.any? { |recipe| recipe['id'] == recipe2.id })
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class StepsController < ApplicationController
-  before_action :set_recipe
   before_action :set_step, only: %i[edit update destroy]
+  before_action :set_recipe, only: %i[index new create update destroy add_ingredient]
 
   def new
     @step = Step.new
@@ -49,11 +49,11 @@ class StepsController < ApplicationController
   private
 
   def set_recipe
-    @recipe = Recipe.find(params[:recipe_id])
+    @recipe = params.include?(:recipe_id) ? Recipe.find(params[:recipe_id]) : @step.recipe
   end
 
   def set_step
-    @step = @recipe.steps.find(params[:id])
+    @step = Step.find(params[:id])
   end
 
   def step_params

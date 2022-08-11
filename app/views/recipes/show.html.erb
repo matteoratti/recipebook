@@ -28,7 +28,7 @@
   </div>
   <%= link_to "Add New Step",
               [:new, @recipe, :step],
-              data: { turbo_frame: nested_dom_id(@recipe, Step.new) },
+              data: { turbo_frame: nested_dom_id("new_step") },
               class: "btn btn-primary my-5" %>
 </div>
 

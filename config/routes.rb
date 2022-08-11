@@ -13,15 +13,18 @@ Rails.application.routes.draw do
     resources :likes, only: %i[create destroy]
   end
 
-  resources :recipes, concerns: %i[image_deletable likeable] do
-    resources :steps do
-      post :add_ingredient, on: :collection
+  resources :users, only: %i[], shallow: true do
+    resources :recipes, concerns: %i[image_deletable] do
+      resources :steps do
+        post :add_ingredient
+      end
     end
   end
 
   get '/autocomplete', to: 'ingredients#autocomplete'
 
   resources :steps, concerns: %i[likeable], only: %i[]
+  resources :recipes, concerns: %i[likeable], only: %i[]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

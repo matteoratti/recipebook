@@ -2,11 +2,11 @@
   <h1>Editing recipe</h1>
 
   <%= turbo_frame_tag nested_dom_id(@recipe, 'edit') do %>
-    <%= render "form", recipe: @recipe %>
+    <%= render "form", params: [ @recipe ], recipe: @recipe %>
+    <%= link_to "Cancel", recipe_path(@recipe), class: "btn btn-danger mt-3" %>
   <% end %>
 
   <br>
   
   <%= link_to "Show this recipe", @recipe %>
-  <%= link_to "Back to recipes", recipes_path %>
 </div>

@@ -9,4 +9,5 @@ class User < ApplicationRecord
   include HasLikes
 
   has_many :liked, class_name: 'Like', dependent: :nullify
+  has_many :recipes, dependent: :destroy
 end

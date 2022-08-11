@@ -1,12 +1,5 @@
 <main class="container">
-  <%= link_to sanitize("&larr; Back to quote"), recipe_path(@recipe) %>
-
-  <div class="header">
-    <h1>New step</h1>
-  </div>
-
-  <%= turbo_frame_tag nested_dom_id(@recipe, Step.new) do %>
-    <%= render "form", recipe: @recipe, step: @step %>
+  <%= turbo_frame_tag nested_dom_id("new_step") do %>
+    <%= render "form", params: [@recipe, @step], step: @step, recipe: @recipe %>
   <% end %>
-
 </main>

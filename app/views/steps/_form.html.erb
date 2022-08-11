@@ -1,4 +1,4 @@
-<%= form_with(model: step, url: [recipe, step]) do |step_field| %>
+<%= form_with(model: params) do |step_field| %>
   <div class="card shadow-sm col-5 my-3">
     <div class="card-body">
 
@@ -30,11 +30,11 @@
           <%= render "step_ingredient_form", step_ingredients_fields: step_ingredients_fields %>
       <% end %>
 
-      <%= step_field.button "Add ingredient", class:'btn btn-sm btn-primary', formmethod: "post", formaction: add_ingredient_recipe_steps_path(@recipe, id: step.id), data: { turbo_frame: false} %>
+      <%# step_field.button "Add ingredient", class:'btn btn-sm btn-primary', formmethod: "post", formaction: step_add_ingredient_path(step), data: { turbo_frame: false} %>
 
       <div class="d-flex justify-content-between align-items-center my-3">
           <%= step_field.submit class: "btn btn-success" %>
-          <%= link_to "Cancel", @recipe, class: "btn btn-danger" %>
+          <%= link_to "Cancel", recipe_path(recipe), class: "btn btn-danger" %>
       </div>
     </div>
   </div>

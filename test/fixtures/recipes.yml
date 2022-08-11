@@ -1,13 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 carbonara:
+  user: user1
   name: carbonara
   body: 'la carbonara si fa con le uova'
 
 amatriciana:
+  user: user2
   name: amatriciana
   body: 'si fa col pomodoro'
 
 pollo_al_limone:
+  user: user1
   name: 'pollo al limone'
   body: 'si fa col il limone'
