@@ -9,6 +9,7 @@ class Recipe < ApplicationRecord
   has_many :tags, as: :taggable, dependent: :destroy
 
   include HasLikes
+  include FilterByName
 
   has_one_attached :image
 
