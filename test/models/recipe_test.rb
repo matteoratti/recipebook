@@ -60,13 +60,13 @@ class RecipeTest < ActiveSupport::TestCase
 
   test 'query must returns only recipe ingredients from recipe steps' do
     # recipe pesto
-    recipe1 = Recipe.create(name: 'pesto', body: 'pesto body')
+    recipe1 = Recipe.create(user: @user, name: 'pesto', body: 'pesto body')
     recipe1_step1 = Step.create(recipe: recipe1, description: 'aggiungere basilico', order: 1, body: 'recipe1 step1 body', duration: 10)
     recipe1_ingredient = Ingredient.create(name: 'basilico', unit_type: :g)
     StepIngredient.create(step: recipe1_step1, ingredient: recipe1_ingredient, quantity: 10)
 
     # recipe ragu
-    recipe2 = Recipe.create(name: 'ragu', body: 'ragu body')
+    recipe2 = Recipe.create(user: @user, name: 'ragu', body: 'ragu body')
     recipe2_step1 = Step.create(recipe: recipe2, description: 'aggiungere manzo', order: 1, body: 'recipe 2 step1 body', duration: 20)
     recipe2_ingredient = Ingredient.create(name: 'manzo', unit_type: :g)
     StepIngredient.create(step: recipe2_step1, ingredient: recipe2_ingredient, quantity: 20)

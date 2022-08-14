@@ -6,6 +6,7 @@ class StepsController < ApplicationController
 
   def new
     @step = Step.new
+    @step.step_ingredients.build.build_ingredient
   end
 
   def edit; end

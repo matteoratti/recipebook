@@ -1,7 +1,7 @@
 <div class="row my-3">
   <%= step_ingredients_fields.fields_for :ingredient do |ingredient_form| %>
     <div class="col">
-      <div data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="/autocomplete">
+      <div data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="/ingredients/autocomplete">
         <%= ingredient_form.text_field :name, data:{"autocomplete-target" => "input"}, placeholder: "ingredient", class: "form-control" %>
         <ul class="p-0 border-bottom border-start border-end rounded-bottom" data-autocomplete-target="results"></ul>
       </div>

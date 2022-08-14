@@ -4,9 +4,15 @@ class RecipesController < ApplicationController
   before_action :set_user, only: %i[index new edit create destroy]
   before_action :set_recipe, only: %i[show edit update destroy add_step delete_image]
 
+  include Autocompletable
+
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.with_image.with_steps
+    @recipes = if params[:q]
+                 Recipe.filter_by_name(params[:q]).with_image.with_steps
+               else
+                 Recipe.with_image.with_steps
+               end
   end
 
   # GET /recipes/1 or /recipes/1.json
@@ -63,7 +69,7 @@ class RecipesController < ApplicationController
   end
 
   def set_user
-    @user ||= User.first
+    @user = User.first
   end
 
   # Only allow a list of trusted parameters through.

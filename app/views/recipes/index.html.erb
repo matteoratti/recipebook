@@ -6,6 +6,17 @@
       <p>
         <%= link_to "New recipe", new_user_recipe_path(@user), class: "btn btn-primary my-2" %>
       </p>
+      <div class="bd-example">
+        <%= form_with(url: user_recipes_path(@user), class: "row g-3", method: "get") do |field| %>
+          <div data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="<%= autocomplete_recipes_path %>">
+            <%= field.text_field :q, data:{"autocomplete-target" => "input"}, placeholder: "Search...", class: "form-control" %>
+            <ul class="p-0 border-bottom border-start border-end rounded-bottom" data-autocomplete-target="results"></ul>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary mb-3">Search</button>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
