@@ -81,3 +81,5 @@ group :test do
   gem 'simplecov'
   gem 'webdrivers'
 end
+
+gem "pundit", "~> 2.2"

@@ -3,9 +3,12 @@
 class StepsController < ApplicationController
   before_action :set_step, only: %i[edit update destroy]
   before_action :set_recipe, only: %i[index new create update destroy add_ingredient]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :authorize_step, only: %i[edit update destroy]
 
   def new
-    @step = Step.new
+    @step = Step.new(recipe: @recipe)
+    authorize_step
     @step.step_ingredients.build.build_ingredient
   end
 
@@ -13,6 +16,8 @@ class StepsController < ApplicationController
 
   def create
     @step = @recipe.steps.build(step_params)
+
+    authorize_step
 
     if @step.save
       render formats: :turbo_stream
@@ -55,6 +60,10 @@ class StepsController < ApplicationController
 
   def set_step
     @step = Step.find(params[:id])
+  end
+
+  def authorize_step
+    authorize @step
   end
 
   def step_params

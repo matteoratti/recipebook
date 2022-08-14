@@ -13,6 +13,7 @@ class Step < ApplicationRecord
   accepts_nested_attributes_for :step_ingredients, allow_destroy: true
 
   scope :with_step_ingredients, -> { includes(:step_ingredients) }
+  scope :with_recipe, -> { includes(:recipe) }
 
   before_save :find_or_create_ingredients
 

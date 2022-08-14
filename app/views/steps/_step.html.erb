@@ -5,15 +5,18 @@
       <div class="d-flex justify-content-between align-items-center">
         <small class="text-muted"><%= step.order %>.</small>
         <div class="d-flex gap-2">
-          <%= link_to [:edit, step],
-                      data: { turbo_frame: nested_dom_id("new_step") },
-                      class: "btn btn-sm btn-outline-secondary" do %>
-                      <i class="bi bi-pencil-square"></i>
+          <% if policy(step).update? %>
+            <%= link_to [:edit, step],
+                        data: { turbo_frame: nested_dom_id("new_step") },
+                        class: "btn btn-sm btn-outline-secondary"  do %>
+                        <i class="bi bi-pencil-square"></i>
+            <% end %>
           <% end %>
+          
           <%= button_to raw("<i class=\"bi bi-trash-fill\"></i>"),
                         [step],
                         method: :delete,
-                        class: "btn btn-sm btn-outline-danger" %>
+                        class: "btn btn-sm btn-outline-danger" if policy(step).destroy? %>
           <%= like_element(step) %>
           <%= like_counter(step) %>
         </div>
