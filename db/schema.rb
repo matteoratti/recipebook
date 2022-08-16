@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_10_131951) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_16_130502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_10_131951) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activity_logs", force: :cascade do |t|
+    t.string "item_type"
+    t.bigint "item_id"
+    t.bigint "user_id"
+    t.boolean "notificable"
+    t.string "activity_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_activity_logs_on_item"
+    t.index ["user_id"], name: "index_activity_logs_on_user_id"
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.integer "unit_type"
@@ -58,6 +70,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_10_131951) do
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
     t.index ["user_id", "likeable_id", "likeable_type"], name: "index_likes_on_user_id_and_likeable_id_and_likeable_type", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "activity_log_id", null: false
+    t.boolean "viewed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_log_id"], name: "index_notifications_on_activity_log_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -124,7 +146,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_10_131951) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activity_logs", "users"
   add_foreign_key "likes", "users"
+  add_foreign_key "notifications", "activity_logs"
+  add_foreign_key "notifications", "users"
   add_foreign_key "recipes", "users"
   add_foreign_key "step_ingredients", "ingredients"
   add_foreign_key "step_ingredients", "steps"

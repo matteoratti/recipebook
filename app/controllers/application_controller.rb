@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
-  
+
   helper_method :like_of_current_user
   layout :layout_by_resource
 

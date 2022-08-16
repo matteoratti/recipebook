@@ -35,6 +35,8 @@ class RecipesController < ApplicationController
     @recipe = @user.recipes.build(recipe_params)
 
     if @recipe.save
+      receivers_ids = @recipe.user.likes.pluck(:user_id)
+      ActivityLog.create(sender: current_user, item: @recipe, notificable: true, activity_type: 'create_recipe', receivers: receivers_ids)
       redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.'
     else
       render :new, status: :unprocessable_entity
@@ -44,6 +46,8 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
     if @recipe.update(recipe_params)
+      receivers_ids = @recipe.likes.pluck(:user_id)
+      ActivityLog.create(sender: current_user, item: @recipe, notificable: true, activity_type: 'update_recipe', receivers: receivers_ids)
       redirect_to recipe_url(@recipe), notice: 'Recipe was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
@@ -52,8 +56,9 @@ class RecipesController < ApplicationController
 
   # DELETE /recipes/1 or /recipes/1.json
   def destroy
-    @recipe.destroy
+    return unless @recipe.destroy
 
+    ActivityLog.create(sender: current_user, item: @recipe, notificable: false, activity_type: 'remove_recipe')
     redirect_to user_recipes_url(@user), notice: 'Recipe was successfully destroyed.'
   end
 

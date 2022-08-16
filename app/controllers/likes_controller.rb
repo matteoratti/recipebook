@@ -9,6 +9,7 @@ class LikesController < ApplicationController
     @like = Like.new(user: current_user, likeable: @likeable)
 
     if @like.save
+      ActivityLog.create(sender: current_user, item: @likeable, notificable: true, activity_type: 'add_like', receivers: [@receiver])
       render :like, formats: :turbo_stream
     else
       render :new, status: :unprocessable_entity
@@ -16,7 +17,10 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    render :like, formats: :turbo_stream if @like.destroy
+    return unless @like.destroy
+
+    ActivityLog.create(sender: current_user, item: @likeable, notificable: false, activity_type: 'remove_like')
+    render :like, formats: :turbo_stream
   end
 
   private
@@ -26,14 +30,17 @@ class LikesController < ApplicationController
   end
 
   def set_likeable
-    @likeable = if params.include?(:user_id)
-                  User.find(params[:user_id])
-                elsif params.include?(:recipe_id)
-                  Recipe.find(params[:recipe_id])
-                elsif params.include?(:step_id)
-                  Step.find(params[:step_id])
-                else
-                  raise UnprocessableEntityError, :context_missing
-                end
+    if params.include?(:user_id)
+      @likeable = User.find(params[:user_id])
+      @receiver = @likeable.id
+    elsif params.include?(:recipe_id)
+      @likeable = Recipe.find(params[:recipe_id])
+      @receiver = @likeable.user_id
+    elsif params.include?(:step_id)
+      @likeable = Step.find(params[:step_id])
+      @receiver = @likeable.recipe.user_id
+    else
+      raise UnprocessableEntityError, :context_missing
+    end
   end
 end
