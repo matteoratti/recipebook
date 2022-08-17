@@ -20,6 +20,7 @@ class StepsController < ApplicationController
     authorize_step
 
     if @step.save
+      ActivityLog.create(actor: current_user, item: @step, activity_type: 'create_step')
       render formats: :turbo_stream
     else
       render :new, status: :unprocessable_entity
@@ -28,6 +29,8 @@ class StepsController < ApplicationController
 
   def update
     if @step.update(step_params)
+      receivers_ids = @step.likes.pluck(:user_id)
+      ActivityLog.create(actor: current_user, item: @step, notificable: true, activity_type: 'update_step', receivers: receivers_ids)
       render formats: :turbo_stream
     else
       render :edit, status: :unprocessable_entity
@@ -35,7 +38,10 @@ class StepsController < ApplicationController
   end
 
   def destroy
-    render formats: :turbo_stream if @step.destroy
+    return unless @step.destroy
+
+    ActivityLog.create(actor: current_user, item: @step, activity_type: 'remove_step')
+    render formats: :turbo_stream
   end
 
   def add_ingredient

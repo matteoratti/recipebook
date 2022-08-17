@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 class StepPolicy < ApplicationPolicy
   def create?
-    is_owner?
+    owner?
   end
-  
+
   def update?
-    is_owner?
+    owner?
   end
 
   def destroy?
-    is_owner?
+    owner?
   end
 
   private
 
-  def is_owner?
+  def owner?
     user == record.recipe.user
   end
 end

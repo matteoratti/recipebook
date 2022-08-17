@@ -1,0 +1,17 @@
+<div class="dropdown-item pointer">
+  <div class="align-items-center g-0 row">
+    <div class="pl-2 col-10">
+      <div class="text-dark"><%= notification.activity_log.actor.email %></div>
+      <div class="text-muted small mt-1">Action: <%= t(notification.activity_log.activity_type) %></div>
+      <div class="text-muted small mt-1"><%= t(notification.activity_log.item) %></div>
+      <div class="text-muted small mt-1">
+        <%= distance_of_time_in_words(Time.now, notification.activity_log.created_at)%> ago
+      </div>
+    </div>
+    <div class="col-2">
+      <%= turbo_frame_tag nested_dom_id("notification-view-icon", notification.id) do %>
+        <%= button_to raw("<i class=\"bi bi-bookmark\"></i>"), view_notification_path(notification), method: :patch %>
+      <% end %>
+    </div>
+  </div>
+</div>

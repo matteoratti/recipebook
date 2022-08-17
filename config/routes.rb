@@ -30,6 +30,14 @@ Rails.application.routes.draw do
   resources :steps, concerns: %i[likeable], only: %i[]
   resources :ingredients, concerns: %i[autocompletable], only: %i[]
 
+  resources :notifications, only: [:index] do
+    patch :view_all, on: :collection
+
+    member do
+      patch :view
+    end
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

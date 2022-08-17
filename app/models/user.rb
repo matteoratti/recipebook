@@ -10,4 +10,6 @@ class User < ApplicationRecord
 
   has_many :liked, class_name: 'Like', dependent: :nullify
   has_many :recipes, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_many :activity_logs, dependent: :nullify
 end
