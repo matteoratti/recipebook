@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     @like = Like.new(user: current_user, likeable: @likeable)
 
     if @like.save
-      ActivityLog.create(sender: current_user, item: @likeable, notificable: true, activity_type: 'add_like', receivers: [@receiver])
+      ActivityLog.create(actor: current_user, item: @likeable, notificable: true, activity_type: 'add_like', receivers: [@receiver])
       render :like, formats: :turbo_stream
     else
       render :new, status: :unprocessable_entity
@@ -19,7 +19,7 @@ class LikesController < ApplicationController
   def destroy
     return unless @like.destroy
 
-    ActivityLog.create(sender: current_user, item: @likeable, notificable: false, activity_type: 'remove_like')
+    ActivityLog.create(actor: current_user, item: @likeable, activity_type: 'remove_like')
     render :like, formats: :turbo_stream
   end
 

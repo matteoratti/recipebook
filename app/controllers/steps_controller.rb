@@ -20,7 +20,7 @@ class StepsController < ApplicationController
     authorize_step
 
     if @step.save
-      ActivityLog.create(sender: current_user, item: @step, notificable: false, activity_type: 'create_step')
+      ActivityLog.create(actor: current_user, item: @step, activity_type: 'create_step')
       render formats: :turbo_stream
     else
       render :new, status: :unprocessable_entity
@@ -30,7 +30,7 @@ class StepsController < ApplicationController
   def update
     if @step.update(step_params)
       receivers_ids = @step.likes.pluck(:user_id)
-      ActivityLog.create(sender: current_user, item: @step, notificable: true, activity_type: 'update_step', receivers: receivers_ids)
+      ActivityLog.create(actor: current_user, item: @step, notificable: true, activity_type: 'update_step', receivers: receivers_ids)
       render formats: :turbo_stream
     else
       render :edit, status: :unprocessable_entity
@@ -40,7 +40,7 @@ class StepsController < ApplicationController
   def destroy
     return unless @step.destroy
 
-    ActivityLog.create(sender: current_user, item: @step, notificable: false, activity_type: 'remove_step')
+    ActivityLog.create(actor: current_user, item: @step, activity_type: 'remove_step')
     render formats: :turbo_stream
   end
 

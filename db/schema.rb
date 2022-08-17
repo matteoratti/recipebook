@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_130502) do
     t.string "item_type"
     t.bigint "item_id"
     t.bigint "user_id"
-    t.boolean "notificable"
+    t.boolean "notificable", default: false
     t.string "activity_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

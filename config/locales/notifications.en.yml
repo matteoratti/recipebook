@@ -1,0 +1,5 @@
+en:
+  add_like: "you received a like"
+  create_recipe: "a followed user created a recipe"
+  update_recipe: "a followed recipe has changed"
+  update_step: "a followed recipe has changed one step"
