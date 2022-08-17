@@ -1,16 +1,22 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  before_action :set_user, only: %i[index new edit create destroy]
-  before_action :set_recipe, only: %i[show edit update destroy add_step delete_image]
-  before_action :authenticate_user!, :authorize_recipe, only: %i[new create edit update destroy]
+  before_action :set_user, only: %i[index my_recipes new edit create destroy]
+  before_action :set_recipe, only: %i[show edit update destroy add_step delete_image archive publish] 
+  before_action :authenticate_user!, only: %i[new create edit update destroy archive publish user_recipes]
+  before_action :authorize_recipe, only: %i[edit update destroy archive publish]
 
   include Autocompletable
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.with_image.with_steps 
-    @recipes = Recipe.filter_by_name(params[:q]).with_image.with_steps if params[:q]
+    @recipes = Recipe.published.with_image.with_steps 
+    @recipes = Recipe.published.filter_by_name(params[:q]).with_image.with_steps if params[:q]
+  end
+
+  # GET /user/:id/my_recipes or /recipes.json
+  def my_recipes
+    @recipes = current_user.recipes.with_image.with_steps 
   end
 
   # GET /recipes/1 or /recipes/1.json
@@ -57,6 +63,22 @@ class RecipesController < ApplicationController
 
     ActivityLog.create(actor: current_user, item: @recipe, activity_type: 'remove_recipe')
     redirect_to user_recipes_url(@user), notice: 'Recipe was successfully destroyed.'
+  end
+
+  def publish
+    if @recipe.published!
+      ActivityLog.create(actor: current_user, item: @recipe, activity_type: 'publish_recipe')
+    end
+
+    redirect_to recipe_url(@recipe), notice: 'Recipe has been published.'
+  end
+  
+  def archive
+    if @recipe.archived!
+      ActivityLog.create(actor: current_user, item: @recipe, activity_type: 'archive_recipe')
+    end
+
+    redirect_to recipe_url(@recipe), notice: 'Recipe has been archived.'
   end
 
   def delete_image

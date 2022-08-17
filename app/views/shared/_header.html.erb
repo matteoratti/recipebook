@@ -5,8 +5,11 @@
   <% end %>
 
   <div class="navbar-align navbar-nav d-flex flex-row align-items-center">
-    <!-- notifications -->
     <% if user_signed_in? %>
+
+      <%= link_to "my recipes", my_recipes_user_path(current_user) %>
+
+      <!-- notifications -->
       <%= turbo_stream_from dom_id(current_user, "broadcast_to") %>
 
       <div class="me-2 nav-item dropdown">
@@ -18,7 +21,6 @@
         </a>
 
         <!-- notifications will be appended here -->
-        
         <div id="notifications-list" class="dropdown-menu" aria-labelledby="notificationsDropdown">
           <% if current_user.notifications.unviewed.empty?  %>
           "No notifications to read." 
@@ -40,7 +42,6 @@
           </div>
         </div>
       </div>
-
 
       <div class="me-2 nav-item px-3">  
         <small><%= current_user.email %></small>

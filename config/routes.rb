@@ -20,7 +20,14 @@ Rails.application.routes.draw do
   resources :recipes, concerns: %i[likeable autocompletable], only: %i[]
 
   resources :users, only: %i[], concerns: %i[likeable], shallow: true do
+    member do
+      get :my_recipes, to: "recipes#my_recipes"
+    end
     resources :recipes, concerns: %i[image_deletable] do
+      member do
+        patch :publish
+        patch :archive
+      end
       resources :steps do
         post :add_ingredient
       end

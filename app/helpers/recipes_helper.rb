@@ -8,4 +8,9 @@ module RecipesHelper
       image_tag '/placeholder_recipe.png', class: 'img-fluid image-card'
     end
   end
+
+
+  def recipe_status(status)
+    tag.span status, class: "badge bg-primary"
+  end
 end
