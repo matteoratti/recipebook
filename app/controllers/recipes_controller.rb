@@ -9,11 +9,8 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = if params[:q]
-                 Recipe.filter_by_name(params[:q]).with_image.with_steps
-               else
-                 Recipe.with_image.with_steps
-               end
+    @recipes = Recipe.with_image.with_steps 
+    @recipes = Recipe.filter_by_name(params[:q]).with_image.with_steps if params[:q]
   end
 
   # GET /recipes/1 or /recipes/1.json
