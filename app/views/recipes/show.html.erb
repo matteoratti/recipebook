@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <section class="py-5 text-center container">
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
@@ -8,7 +6,11 @@
         <h1 class="fw-light"><%= @recipe.name.capitalize %></h1>
         <p class="lead text-muted"><%= @recipe.body.capitalize %></p>
         <%= link_to "Edit", edit_recipe_path(@recipe), class: "btn btn-primary my-2" if policy(@recipe).update? %>
-        <%= button_to "Destroy", @recipe, method: :delete, data:{turbo: false}, class: "btn btn-danger my-2", :form_class => "d-inline-block" if policy(@recipe).destroy?%>        
+        <%= button_to "Destroy", @recipe, method: :delete, data:{turbo: false}, class: "btn btn-danger my-2", :form_class => "d-inline-block" if policy(@recipe).destroy?%>
+        
+        <%= button_to "Publish", publish_recipe_path(@recipe), method: :patch, data:{turbo: false}, class: "btn btn-primary my-2", :form_class => "d-inline-block" if policy(@recipe).publish? && @recipe.draft? || @recipe.archived?  %>
+        <%= button_to "Archive", archive_recipe_path(@recipe), method: :patch, data:{turbo: false}, class: "btn btn-secondary my-2", :form_class => "d-inline-block" if policy(@recipe).archive? && @recipe.published? %>
+
         <%= like_element(@recipe) %>
         <%= like_counter(@recipe) %>
       <% end %>
