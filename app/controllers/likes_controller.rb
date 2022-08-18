@@ -2,14 +2,18 @@
 
 class LikesController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy]
-  before_action :set_likeable, only: %i[create destroy]
+  before_action :set_likeable_and_receiver, only: %i[create destroy]
   before_action :set_like, only: %i[destroy]
+
+  include Logify
+  after_action :logify_action, only: %i[create destroy]
 
   def create
     @like = Like.new(user: current_user, likeable: @likeable)
 
     if @like.save
-      ActivityLog.create(actor: current_user, item: @likeable, notificable: true, activity_type: 'add_like', receivers: [@receiver])
+      @notify_to = [@receiver]
+
       render :like, formats: :turbo_stream
     else
       render :new, status: :unprocessable_entity
@@ -19,7 +23,6 @@ class LikesController < ApplicationController
   def destroy
     return unless @like.destroy
 
-    ActivityLog.create(actor: current_user, item: @likeable, activity_type: 'remove_like')
     render :like, formats: :turbo_stream
   end
 
@@ -29,7 +32,7 @@ class LikesController < ApplicationController
     @like = Like.find(params[:id])
   end
 
-  def set_likeable
+  def set_likeable_and_receiver
     if params.include?(:user_id)
       @likeable = User.find(params[:user_id])
       @receiver = @likeable.id

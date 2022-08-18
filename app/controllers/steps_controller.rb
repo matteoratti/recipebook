@@ -6,10 +6,13 @@ class StepsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :authorize_step, only: %i[edit update destroy]
 
+  include Logify
+  after_action :logify_action, only: %i[create update destroy add_ingredient]
+
   def new
     @step = Step.new(recipe: @recipe)
     authorize_step
-    @step.step_ingredients.build.build_ingredient
+    @step.step_ingredients.build&.build_ingredient
   end
 
   def edit; end
@@ -20,7 +23,7 @@ class StepsController < ApplicationController
     authorize_step
 
     if @step.save
-      ActivityLog.create(actor: current_user, item: @step, activity_type: 'create_step')
+      @notify_to = @step.recipe.followers
       render formats: :turbo_stream
     else
       render :new, status: :unprocessable_entity
@@ -29,8 +32,8 @@ class StepsController < ApplicationController
 
   def update
     if @step.update(step_params)
-      receivers_ids = @step.likes.pluck(:user_id)
-      ActivityLog.create(actor: current_user, item: @step, notificable: true, activity_type: 'update_step', receivers: receivers_ids)
+      @notify_to = @step.recipe.followers
+
       render formats: :turbo_stream
     else
       render :edit, status: :unprocessable_entity
@@ -40,7 +43,8 @@ class StepsController < ApplicationController
   def destroy
     return unless @step.destroy
 
-    ActivityLog.create(actor: current_user, item: @step, activity_type: 'remove_step')
+    @notify_to = @step.recipe.followers
+
     render formats: :turbo_stream
   end
 
@@ -53,7 +57,7 @@ class StepsController < ApplicationController
       @step = Step.new(step_params.merge({ id: params[:id] }))
     end
 
-    @step.step_ingredients.build.build_ingredient
+    @step.step_ingredients.build&.build_ingredient
 
     render :edit
   end
