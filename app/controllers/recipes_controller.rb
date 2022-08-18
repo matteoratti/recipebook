@@ -72,7 +72,7 @@ class RecipesController < ApplicationController
   end
 
   def archive
-    redirect_to recipe_url(@recipe), notice: 'Recipe has been archived.' if @recipe.archive!
+    redirect_to recipe_url(@recipe), notice: 'Recipe has been archived.' if @recipe.archived!
   end
 
   def delete_image

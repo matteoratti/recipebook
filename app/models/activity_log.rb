@@ -8,6 +8,9 @@ class ActivityLog < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :receivers, through: :notifications
 
+  # now you can use 'self.name' instead 'self.activity_type.name'
+  delegate :name, to: :activity_type
+
   serialize :changed_data, Hash
 
   scope :with_actor,         -> { includes(:user).references(:user) }

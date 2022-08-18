@@ -23,6 +23,8 @@ class LikesController < ApplicationController
   def destroy
     return unless @like.destroy
 
+    @notify_to = [@receiver]
+
     render :like, formats: :turbo_stream
   end
 
