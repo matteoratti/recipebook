@@ -17,11 +17,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :recipes, concerns: %i[likeable autocompletable], only: %i[]
+  resources :recipes, concerns: %i[likeable autocompletable], only: %i[index]
 
   resources :users, only: %i[], concerns: %i[likeable], shallow: true do
     member do
-      get :my_recipes, to: "recipes#my_recipes"
+      get :my_recipes, to: 'recipes#my_recipes'
     end
     resources :recipes, concerns: %i[image_deletable] do
       member do

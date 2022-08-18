@@ -1,19 +1,18 @@
 # frozen_string_literal: true
 
 class ActivityLog < ApplicationRecord
-  belongs_to :item, polymorphic: true
+  belongs_to :activity_type
+  belongs_to :target, polymorphic: true
   belongs_to :actor, class_name: :User, foreign_key: 'user_id'
 
   has_many :notifications, dependent: :destroy
   has_many :receivers, through: :notifications
 
-  scope :with_actor, -> { includes(:user).references(:user) }
+  # now you can use 'self.name' instead 'self.activity_type.name'
+  delegate :name, to: :activity_type
 
-  after_create :notify, if: :notificable
+  serialize :changed_data, Hash
 
-  attr_accessor :receivers
-
-  def notify
-    SendNotificationJob.perform_later self, receivers
-  end
+  scope :with_actor,         -> { includes(:user).references(:user) }
+  scope :with_activity_type, -> { includes(:activity_type) }
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_16_130502) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_17_180317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,15 +43,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_130502) do
   end
 
   create_table "activity_logs", force: :cascade do |t|
-    t.string "item_type"
-    t.bigint "item_id"
+    t.string "target_type"
+    t.bigint "target_id"
     t.bigint "user_id"
-    t.boolean "notificable", default: false
-    t.string "activity_type"
+    t.string "changed_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_type", "item_id"], name: "index_activity_logs_on_item"
+    t.bigint "activity_type_id", null: false
+    t.index ["activity_type_id"], name: "index_activity_logs_on_activity_type_id"
+    t.index ["target_type", "target_id"], name: "index_activity_logs_on_target"
     t.index ["user_id"], name: "index_activity_logs_on_user_id"
+  end
+
+  create_table "activity_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -146,6 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_130502) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activity_logs", "activity_types"
   add_foreign_key "activity_logs", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "notifications", "activity_logs"

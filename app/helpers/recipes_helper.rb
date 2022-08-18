@@ -9,8 +9,7 @@ module RecipesHelper
     end
   end
 
-
   def recipe_status(status)
-    tag.span status, class: "badge bg-primary"
+    tag.span status, class: 'badge bg-primary'
   end
 end

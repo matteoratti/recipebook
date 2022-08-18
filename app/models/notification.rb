@@ -4,10 +4,10 @@ class Notification < ApplicationRecord
   belongs_to :receiver, class_name: :User, foreign_key: 'user_id'
   belongs_to :activity_log
 
-  scope :with_log, -> { includes(activity_log: :actor) }
+  scope :with_log, -> { includes(activity_log: %i[actor activity_type]) }
 
   scope :unviewed, -> { where(viewed: false) }
-  scope :latest, -> { order(:created_at) }
+  scope :latest,   -> { order(:created_at) }
 
   after_create_commit :broadcast_notification
   after_save_commit :notifications_count_update

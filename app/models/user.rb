@@ -9,7 +9,15 @@ class User < ApplicationRecord
   include HasLikes
 
   has_many :liked, class_name: 'Like', dependent: :nullify
+  has_many :logs, class_name: 'ActivityLog', as: :actor, dependent: :delete_all
   has_many :recipes, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :activity_logs, dependent: :nullify
+
+  def logify(target, action, receivers = nil, changed_data = nil)
+    activity_type = ActivityType.find_or_create_by(name: action)
+
+    activity_log = ActivityLog.create(actor: self, target: target, activity_type_id: activity_type.id, changed_data: changed_data)
+
+    SendNotificationJob.perform_later(activity_log, receivers) if receivers
+  end
 end
