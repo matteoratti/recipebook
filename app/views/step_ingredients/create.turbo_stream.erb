@@ -1,0 +1,11 @@
+<%= fields model: @step do |form| %>
+  <%= form.fields_for :step_ingredients, child_index: params[:index] do |step_ingredients| %>
+    <%= turbo_stream.replace "add-ingredient" do %>
+      <%= add_ingredient_button(step_ingredients, params[:index].to_i + 1) %>
+    <% end %>
+
+    <%= turbo_stream.append "step_ingredient_container" do %>
+      <%= render "steps/step_ingredient_form", step_ingredients_fields: step_ingredients %>
+    <% end %>
+  <% end %>
+<% end %>
