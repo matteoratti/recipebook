@@ -19,18 +19,18 @@
         </a>
 
         <div id="notifications-list" class="dropdown-menu" aria-labelledby="notificationsDropdown">
+          <!--view-all button or viewed-all text -->
+          <%= turbo_frame_tag nested_dom_id("notification-view-all") do %>
+            <%= render "shared/notifications-view-all", new_notifications: current_user.notifications.unviewed.any? %>
+          <% end %>
+          <hr class="dropdown-divider">
+          
           <!-- empty notifications message -->
           <%= render "shared/empty-notifications", empty_notifications: current_user.notifications.unviewed.empty? %>
 
           <!-- notifications will be appended here -->
           <% current_user.notifications.unviewed.latest.with_log.each do |notification| %>
             <%= render "shared/notification", notification: notification %>
-          <% end %>
-
-          <hr class="dropdown-divider">
-          <!--view-all button or viewed-all text -->
-          <%= turbo_frame_tag nested_dom_id("notification-view-all") do %>
-            <%= render "shared/notifications-view-all", new_notifications: current_user.notifications.unviewed.any? %>
           <% end %>
         </div>
       </div>
