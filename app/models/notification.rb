@@ -15,7 +15,9 @@ class Notification < ApplicationRecord
   private
 
   def broadcast_notification
-    broadcast_prepend_to "broadcast_to_user_#{user_id}", partial: 'shared/notification', locals: { notification: self }, target: 'notifications-list'
+    broadcast_prepend_to "broadcast_to_user_#{user_id}", target: 'notifications-list', partial: 'shared/notification', locals: { notification: self }
+    broadcast_replace_to "broadcast_to_user_#{user_id}", target:  'view-all-element', partial: 'shared/notifications-view-all', locals: { new_notifications: true }
+    broadcast_replace_to "broadcast_to_user_#{user_id}", target:  'empty-notifications', partial: 'shared/empty-notifications', locals: { empty_notifications: false }
   end
 
   def notifications_count_update

@@ -7,9 +7,11 @@
         <%= distance_of_time_in_words(Time.now, notification.activity_log.created_at)%> ago
       </div>
     </div>
-    <div class="col-2">
+
+    <!--button to mark a single notification as read -->
+    <div class="col-2 text-center">
       <%= turbo_frame_tag nested_dom_id("notification-view-icon", notification.id) do %>
-        <%= button_to raw("<i class=\"bi bi-bookmark\"></i>"), view_notification_path(notification), method: :patch %>
+        <%= button_to raw("<i class=\"bi bi-bookmark\"></i>"), view_notification_path(notification), method: :patch, class: "btn btn-sm btn-outline-primary" %>
       <% end %>
     </div>
   </div>
