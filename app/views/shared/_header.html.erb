@@ -10,7 +10,7 @@
       <!-- notifications -->
       <%= turbo_stream_from dom_id(current_user, "broadcast_to") %>
 
-      <div class="me-4 nav-item dropdown">
+      <div class="me-4 nav-item">
         <a class="nav-link nav-icon dropdown-toggle dropdown-toggle notification-dropdown-toggle pointer" id="notificationsDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
           <div class="position-relative">
             <i class="bi bi-bell"></i>
@@ -24,7 +24,7 @@
             <%= render "shared/notifications-view-all", new_notifications: current_user.notifications.unviewed.any? %>
           <% end %>
           <hr class="dropdown-divider">
-          
+
           <!-- empty notifications message -->
           <%= render "shared/empty-notifications", empty_notifications: current_user.notifications.unviewed.empty? %>
 
@@ -36,11 +36,11 @@
       </div>
 
       <!-- user menu dropdown -->
-      <div class="nav-item dropdown">
+      <div class="nav-item">
         <a class="nav-link dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="text-dark">Hello, <%= current_user.email %></span>
         </a>
-        <ul class="dropdown-menu" aria-labelledby="userMenu">
+        <ul id="userMenuDropdown" class="dropdown-menu" aria-labelledby="userMenu">
           <li>
             <%= link_to my_recipes_user_path(current_user), class: "dropdown-item" do %>
               <%= content_tag(:i, "", class: "bi bi-book me-2") %>
