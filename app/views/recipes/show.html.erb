@@ -11,7 +11,7 @@
         <%= button_to "Publish", publish_recipe_path(@recipe), method: :patch, data:{turbo: false}, class: "btn btn-primary my-2", :form_class => "d-inline-block" if policy(@recipe).publish? && @recipe.draft? || @recipe.archived?  %>
         <%= button_to "Archive", archive_recipe_path(@recipe), method: :patch, data:{turbo: false}, class: "btn btn-secondary my-2", :form_class => "d-inline-block" if policy(@recipe).archive? && @recipe.published? %>
 
-        <%= like_element(@recipe) %>
+        <%= like_element(@recipe) if policy(@recipe).like? %>
         <%= like_counter(@recipe) %>
       <% end %>
     </div>
