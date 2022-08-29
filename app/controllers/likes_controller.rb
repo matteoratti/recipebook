@@ -4,6 +4,7 @@ class LikesController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy]
   before_action :set_likeable_and_receiver, only: %i[create destroy]
   before_action :set_like, only: %i[destroy]
+  before_action :authorize_like, only: %i[create destroy]
 
   include Logify
   after_action :logify_action, only: %i[create destroy]
@@ -47,5 +48,9 @@ class LikesController < ApplicationController
     else
       raise UnprocessableEntityError, :context_missing
     end
+  end
+
+  def authorize_like
+    authorize @likeable, :like?
   end
 end

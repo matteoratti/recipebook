@@ -17,7 +17,7 @@
                         [step],
                         method: :delete,
                         class: "btn btn-sm btn-outline-danger" if policy(step).destroy? %>
-          <%= like_element(step, class: "btn btn-success btn-sm my-2") %>
+          <%= like_element(step, class: "btn btn-success btn-sm my-2") if policy(step).like? %>
           <%= like_counter(step) %>
         </div>
       </div>
