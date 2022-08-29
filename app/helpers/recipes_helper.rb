@@ -12,4 +12,9 @@ module RecipesHelper
   def recipe_status(status)
     tag.span status, class: 'badge bg-primary'
   end
+
+  def recipe_duration(recipe)
+    unit_time = recipe.steps.sum('duration') > 1 ? 'mins' : 'min'
+    "#{recipe.steps.sum('duration')} #{unit_time}"
+  end
 end

@@ -1,24 +1,29 @@
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
+<section class="hero-banner container-fluid py-5">
+  <div class="row py-5 text-center">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Recipes Album</h1>
-      <p class="lead text-muted">Discover your best friend's recipes and share yours!</p>
+      <h1 class="fw-bolder text-white">Recipes Album</h1>
+      <p class="lead text-white">Discover your best friend's recipes and share yours!</p>
       <p>
         <%= link_to "New recipe", new_user_recipe_path(current_user), class: "btn btn-primary my-2" if current_user %>
       </p>
-      <div class="bd-example">
-        <%= form_with(url: recipes_path, class: "row g-3", method: "get") do |field| %>
-          <div class="col-8" data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="<%= autocomplete_recipes_path %>">
-            <%= field.text_field :q, data:{"autocomplete-target" => "input"}, placeholder: "Search...", class: "form-control" %>
-            <ul class="p-0 border-bottom border-start border-end rounded-bottom" data-autocomplete-target="results"></ul>
-          </div>
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary mb-3">Search</button>
-          </div>
-        <% end %>
-      </div>
     </div>
   </div>
 </section>
+
+<div class="pt-1 bg-light">
+  <div class="search-bar rounded p-3 p-4 col-8 offset-2 position-relative">
+    <%= form_with(url: recipes_path, class: "", method: "get") do |field| %>
+      <div class="row" data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="<%= autocomplete_recipes_path %>">
+        <div class="d-flex align-items-center form-group col-10">
+          <%= field.text_field :q, data:{"autocomplete-target" => "input"}, placeholder: "What are you searching for?", class: "border-0 shadow-0 form-control" %>
+        </div>
+        <ul class="p-3 mt-2 bg-white position-absolute rounded col-10 autocomplete-dropdown" data-autocomplete-target="results"></ul>
+        <div class="d-grid mb-0 col-2">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <%= render "recipes", recipes: @recipes %>

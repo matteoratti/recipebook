@@ -1,0 +1,16 @@
+.recipe-card{
+  .card-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 72px;
+  }
+
+  .recipe-tag{
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}

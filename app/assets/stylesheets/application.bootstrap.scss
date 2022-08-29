@@ -1,6 +1,10 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'header/notifications.scss';
+@import 'homepage/hero-banner.scss';
+@import 'homepage/search-bar.scss';
+@import 'recipes/recipe-card.scss';
+
 
 .inline-edit-form{
   input, textarea{
