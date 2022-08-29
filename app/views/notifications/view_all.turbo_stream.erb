@@ -1,10 +1,17 @@
-<%= turbo_stream.replace nested_dom_id('notification-view-all') do %>
-  All notifications marked as viewed
+<!-- update view-all button with viewed-all text and viceversa -->
+<%= turbo_stream.update nested_dom_id('notification-view-all') do %>
+  <%= render "shared/notifications-view-all", new_notifications: false %>
 <% end %>
 
-<% @notifications.each do |notification| %>
-  <%= turbo_stream.replace nested_dom_id('notification-view-icon', notification.id) do %>
-    <i class="bi bi-bookmark-check"></i>
+<!-- replace all mark as read buttons with confirmation icons -->
+<% @notifications_ids.each do |id| %>
+  <%= turbo_stream.replace nested_dom_id('notification-view-icon', id) do %>
+     <i class="bi bi-check-lg text-success fs-3"></i>
   <% end %>
+<% end %>
+
+<!-- update notifications counter -->
+<%= turbo_stream.replace "notifications-count" do %>
+  <%= render "shared/notifications-count", count: 0 %>
 <% end %>
 

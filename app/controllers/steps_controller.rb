@@ -2,12 +2,12 @@
 
 class StepsController < ApplicationController
   before_action :set_step, only: %i[edit update destroy]
-  before_action :set_recipe, only: %i[index new create update destroy add_ingredient]
+  before_action :set_recipe, only: %i[index new create update destroy]
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :authorize_step, only: %i[edit update destroy]
 
   include Logify
-  after_action :logify_action, only: %i[create update destroy add_ingredient]
+  after_action :logify_action, only: %i[create update destroy]
 
   def new
     @step = Step.new(recipe: @recipe)
@@ -48,20 +48,6 @@ class StepsController < ApplicationController
     render formats: :turbo_stream
   end
 
-  def add_ingredient
-    if params[:id]
-      set_step
-      @step.assign_attributes(step_params)
-
-    else
-      @step = Step.new(step_params.merge({ id: params[:id] }))
-    end
-
-    @step.step_ingredients.build&.build_ingredient
-
-    render :edit
-  end
-
   private
 
   def set_recipe
@@ -77,9 +63,9 @@ class StepsController < ApplicationController
   end
 
   def step_params
-    params.require(:step).permit(:description, :body, :order, :duration,
+    params.require(:step).permit(:description, :body, :order, :duration, :id,
                                  step_ingredients_attributes: [:_destroy, :id, :quantity, {
-                                   ingredient_attributes: %i[name unit_type]
+                                   ingredient_attributes: %i[name unit_type id]
                                  }])
   end
 end

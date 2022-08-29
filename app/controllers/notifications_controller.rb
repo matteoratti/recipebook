@@ -14,8 +14,8 @@ class NotificationsController < ApplicationController
   end
 
   def view_all
-    @notifications = current_user.notifications.unviewed if current_user
-    @notifications.update_all(viewed: true)
+    @notifications_ids = current_user.notifications.unviewed.ids
+    current_user.notifications.unviewed.update_all(viewed: true) if current_user
     render formats: :turbo_stream
   end
 end

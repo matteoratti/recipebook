@@ -1,21 +1,31 @@
-<div class="row my-3">
-  <%= step_ingredients_fields.fields_for :ingredient do |ingredient_form| %>
-    <div class="col">
-      <div data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="/ingredients/autocomplete">
-        <%= ingredient_form.text_field :name, data:{"autocomplete-target" => "input"}, placeholder: "ingredient", class: "form-control" %>
-        <ul class="p-0 border-bottom border-start border-end rounded-bottom" data-autocomplete-target="results"></ul>
+<%= turbo_frame_tag "step_ingredient_#{step_ingredients_fields.index}" do %>
+  <div class="row my-3">
+    <%= step_ingredients_fields.fields_for :ingredient do |ingredient_form| %>
+      <div class="col">
+        <div data-controller="autocomplete" id="autocomplete" data-autocomplete-url-value="/ingredients/autocomplete">
+          <%= ingredient_form.text_field :name, data:{"autocomplete-target" => "input"}, placeholder: "ingredient", class: "form-control" %>
+          <ul class="p-0 border-bottom border-start border-end rounded-bottom" data-autocomplete-target="results"></ul>
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="input-group">
-        <%= step_ingredients_fields.number_field :quantity, placeholder: "quantity", class: "form-control" %>
-        <%= ingredient_form.select :unit_type, Ingredient.unit_types.keys, {}, {class: "btn btn-outline-secondary dropdown-toggle"} %>
+      <div class="col">
+        <div class="input-group">
+          <%= step_ingredients_fields.number_field :quantity, placeholder: "quantity", class: "form-control" %>
+          <%= ingredient_form.select :unit_type, Ingredient.unit_types.keys, {}, {class: "btn btn-outline-secondary dropdown-toggle"} %>
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="input-group">
-        <%= step_ingredients_fields.check_box '_destroy' %>
+      <div class="col-2">
+        <div class="input-group">
+          <!-- remove step_ingredient button -->
+          <%= button_tag( 
+            class: "btn btn-outline-danger rounded", 
+            type: 'submit', 
+            formaction: step_ingredient_path(step_ingredients_fields.index, step_ingredients_fields.object.id),
+            formmethod: :delete,
+            formnovalidate: true ) do %>
+            <i class="bi bi-trash-fill"></i>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>

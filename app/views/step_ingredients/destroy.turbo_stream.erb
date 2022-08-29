@@ -1,0 +1,8 @@
+
+<%= fields model: @step do |form| %>
+  <%= form.fields_for :step_ingredients, child_index: params[:index] do |step_ingredients| %>
+    <%= turbo_stream.replace "step_ingredient_#{params[:index]}" do %>
+      <%= step_ingredients.hidden_field :_destroy, value: true %>
+    <% end %>
+  <% end %>
+<% end %>
