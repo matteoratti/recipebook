@@ -13,6 +13,10 @@ class StepPolicy < ApplicationPolicy
     owner?
   end
 
+  def like?
+    user != record.recipe.user && !user.nil?
+  end
+
   private
 
   def owner?

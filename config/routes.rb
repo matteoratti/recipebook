@@ -28,9 +28,14 @@ Rails.application.routes.draw do
         patch :publish
         patch :archive
       end
-      resources :steps do
-        post :add_ingredient
-      end
+      resources :steps
+    end
+  end
+
+  resources :step_ingredients, only: [], param: :index do
+    member do
+      delete '(:id)' => 'step_ingredients#destroy', as: ''
+      post '/' => 'step_ingredients#create'
     end
   end
 

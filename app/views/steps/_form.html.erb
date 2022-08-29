@@ -1,4 +1,4 @@
-<%= form_with(model: params) do |step_field| %>
+<%= form_with(model: step, url: url) do |step_field| %>
   <div class="card shadow-sm col-5 my-3">
     <div class="card-body">
 
@@ -25,12 +25,13 @@
         <small>Choose an Ingredient</small>
       </div>
 
-
-      <%= step_field.fields_for :step_ingredients do |step_ingredients_fields| %>
+      <div id="step_ingredient_container">
+        <%= step_field.fields_for :step_ingredients do |step_ingredients_fields| %>
           <%= render "step_ingredient_form", step_ingredients_fields: step_ingredients_fields %>
-      <% end %>
+        <% end %>
+      </div>
 
-      <%# step_field.button "Add ingredient", class:'btn btn-sm btn-primary', formmethod: "post", formaction: step_add_ingredient_path(step), data: { turbo_frame: false} %>
+      <%= add_ingredient_button(step_field, step.step_ingredients.size) %>
 
       <div class="d-flex justify-content-between align-items-center my-3">
           <%= step_field.submit class: "btn btn-success" %>

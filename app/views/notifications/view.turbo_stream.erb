@@ -1,3 +1,4 @@
+<!-- replace mark as read button with confirmation icon -->
 <%= turbo_stream.replace nested_dom_id('notification-view-icon', @notification.id) do %>
-  <i class="bi bi-bookmark-check"></i>
+ <i class="bi bi-check-lg text-success fs-3"></i>
 <% end %>

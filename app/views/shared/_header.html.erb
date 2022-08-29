@@ -7,12 +7,10 @@
   <div class="navbar-align navbar-nav d-flex flex-row align-items-center">
     <% if user_signed_in? %>
 
-      <%= link_to "my recipes", my_recipes_user_path(current_user) %>
-
       <!-- notifications -->
       <%= turbo_stream_from dom_id(current_user, "broadcast_to") %>
 
-      <div class="me-2 nav-item dropdown">
+      <div class="me-4 nav-item">
         <a class="nav-link nav-icon dropdown-toggle dropdown-toggle notification-dropdown-toggle pointer" id="notificationsDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
           <div class="position-relative">
             <i class="bi bi-bell"></i>
@@ -20,36 +18,42 @@
           </div>
         </a>
 
-        <!-- notifications will be appended here -->
         <div id="notifications-list" class="dropdown-menu" aria-labelledby="notificationsDropdown">
-          <% if current_user.notifications.unviewed.empty?  %>
-          "No notifications to read." 
+          <!--view-all button or viewed-all text -->
+          <%= turbo_frame_tag nested_dom_id("notification-view-all") do %>
+            <%= render "shared/notifications-view-all", new_notifications: current_user.notifications.unviewed.any? %>
           <% end %>
+          <hr class="dropdown-divider">
 
+          <!-- empty notifications message -->
+          <%= render "shared/empty-notifications", empty_notifications: current_user.notifications.unviewed.empty? %>
+
+          <!-- notifications will be appended here -->
           <% current_user.notifications.unviewed.latest.with_log.each do |notification| %>
             <%= render "shared/notification", notification: notification %>
           <% end %>
-
-          <hr class="dropdown-divider">
-          <div class="dropdown-item pointer">
-            <div class="align-items-center g-0 row">
-              <div class="pl-2 col-10">
-                <%= turbo_frame_tag nested_dom_id("notification-view-all") do %>
-                  <%= button_to "view all", view_all_notifications_path, method: :patch %>
-                <% end %>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
-      <div class="me-2 nav-item px-3">  
-        <small><%= current_user.email %></small>
+      <!-- user menu dropdown -->
+      <div class="nav-item">
+        <a class="nav-link dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="text-dark">Hello, <%= current_user.email %></span>
+        </a>
+        <ul id="userMenuDropdown" class="dropdown-menu" aria-labelledby="userMenu">
+          <li>
+            <%= link_to my_recipes_user_path(current_user), class: "dropdown-item" do %>
+              <%= content_tag(:i, "", class: "bi bi-book me-2") %>
+              my recipes
+            <% end %>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+              <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </li>
+        </ul>
       </div>
 
-      <div class="me-2 nav-item">
-          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary" %>
-      </div>
     <% else %>
       <div class="me-2 nav-item">
         <%= link_to "Login", new_user_session_path, class: "btn btn-outline-primary" %>

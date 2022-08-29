@@ -1,5 +1,5 @@
 <main class="container">
   <%= turbo_frame_tag nested_dom_id(Step.new) do %>
-    <%= render "form", params: [@step], step: @step, recipe: @step.recipe %>
+    <%= render "form", url: [@step], step: @step, recipe: @step.recipe %>
   <% end %>
 </main>

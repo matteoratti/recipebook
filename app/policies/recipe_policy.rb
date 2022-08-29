@@ -21,6 +21,10 @@ class RecipePolicy < ApplicationPolicy
     owner?
   end
 
+  def like?
+    user != record.user && !user.nil?
+  end
+
   private
 
   def owner?

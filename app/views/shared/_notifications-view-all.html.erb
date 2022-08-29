@@ -1,0 +1,10 @@
+<div id="view-all-element">
+  <% if new_notifications %>
+    <%= button_to "Mark all as viewed", view_all_notifications_path, method: :patch, class: "dropdown-item pointer text-center" %>
+  <% else %>
+    <li id="all-viewed" class="dropdown-item text-center">
+      <i class="bi bi-check-lg text-success"></i>
+      All viewed
+    </li>
+  <% end %>
+</div>
