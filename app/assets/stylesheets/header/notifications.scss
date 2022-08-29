@@ -19,7 +19,9 @@
   }
 }
 
-#notifications.dropdown-menu{
+#notifications-list.dropdown-menu{
+  max-height: 32rem;
+  overflow: scroll;
   min-width: 16rem;
   .dropdown-item{
     &:active{
