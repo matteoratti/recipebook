@@ -6,7 +6,7 @@ module Logify
       private
 
       def logify_action
-        return if (400...600) === response.status 
+        return if (400...600).include?(response.status)
 
         entity = instance_variable_get("@#{controller_name.singularize}")
 
