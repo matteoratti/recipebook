@@ -3,18 +3,25 @@
 require 'test_helper'
 
 class StepsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:user1)
     @step = steps(:one)
     @recipe = @step.recipe
     @step_ingredients = StepIngredient.create(step: @step, ingredient: ingredients(:uova), quantity: 5)
   end
 
   test 'should get new' do
+    sign_in @user
+
     get new_recipe_step_url(@recipe)
     assert_response :success
   end
 
   test 'should create a step' do
+    sign_in @user
+
     params = { step: {
       description: 'step description',
       order:       1,
@@ -30,6 +37,8 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not create a step with invalid params' do
+    sign_in @user
+
     params = { step: {
       description: nil,
       order:       nil,
@@ -45,6 +54,8 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update a step' do
+    sign_in @user
+
     new_params = { step: {
       description: 'new step description',
       order:       2,
@@ -52,7 +63,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
       duration:    240
     } }
 
-    patch step_url(@step), params: new_params
+    p patch step_url(@step), params: new_params
 
     @step.reload
 
@@ -63,6 +74,8 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not update a step with invalid params' do
+    sign_in @user
+
     new_params = { step: {
       description: nil,
       order:       nil,
@@ -76,6 +89,8 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should destroy a step' do
+    sign_in @user
+
     assert_difference('Step.count', -1) do
       delete step_url(@step)
     end
@@ -84,6 +99,8 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should destroy step ingredients when destroy step' do
+    sign_in @user
+
     assert_difference('StepIngredient.count', -1) do
       delete step_url(@step)
     end
@@ -92,6 +109,8 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create a step with step ingredients' do
+    sign_in @user
+
     ingredient1 = ingredients(:uova)
 
     params = { step: {
@@ -118,6 +137,8 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'update a step with step ingredients' do
+    sign_in @user
+
     new_params = { step: {
       description:                 'new step description',
       order:                       3,
