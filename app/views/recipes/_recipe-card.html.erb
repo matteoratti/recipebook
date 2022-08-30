@@ -1,0 +1,24 @@
+<div class="mb-5 col-3">
+  <div class="card shadow-sm recipe-card text-secondary text-decoration-none shadow border-0">
+    <%= link_to recipe do %>
+      <%= recipe_image(recipe) %>
+    <% end %>
+    <div class="card-body">
+      <div class="d-flex justify-content-between mb-2">
+        <small><%= recipe_duration(recipe) %></small>
+        <small><%= like_counter(recipe) %></small>
+      </div>
+      <h4><%= recipe.name.capitalize %></h4>
+      <%= recipe_status(recipe.status) if action_name == "my_recipes" %>
+      <p class="card-text"><%= recipe.body.capitalize %></p>
+      <p class="text-dark">By <%= recipe.user.email %></p>
+      <p class="text-sm mb-0">
+        <% recipe.tags.each do |tag| %>
+          <a class="recipe-tag" href="#">
+            <%= "#{tag.name}#{tag.equal?(recipe.tags.last) ? "" : ","}" %>
+          </a>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,8 @@ class Recipe < ApplicationRecord
   scope :with_steps,       -> { includes(:steps).references(:steps) }
   scope :with_ingredients, -> { includes(:ingredients).references(:ingredients) }
   scope :with_image,       -> { includes(image_attachment: :blob) }
+  scope :with_user,       -> { includes(:user) }
+  scope :with_tags,       -> { includes(:tags) }
 
   scope :drafted,   -> { where(status: :draft) }
   scope :published, -> { where(status: :published) }

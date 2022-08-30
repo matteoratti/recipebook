@@ -13,8 +13,8 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.published.with_image.with_steps
-    @recipes = Recipe.published.filter_by_name(params[:q]).with_image.with_steps if params[:q]
+    @recipes = Recipe.published.with_image.with_user.with_tags.with_steps
+    @recipes = Recipe.published.filter_by_name(params[:q]).with_image.with_user.with_tags.with_steps if params[:q]
   end
 
   # GET /user/:id/my_recipes or /recipes.json
