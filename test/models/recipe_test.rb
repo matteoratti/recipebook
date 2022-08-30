@@ -83,4 +83,14 @@ class RecipeTest < ActiveSupport::TestCase
     assert(@user.recipes.any? { |recipe| recipe['id'] == recipe1.id })
     assert(@user.recipes.any? { |recipe| recipe['id'] == recipe2.id })
   end
+
+  test 'filter_by_name scope should returns published recipes only' do
+    recipes(:carbonara).update(status: 'published')
+
+    default_scope = Recipe.published
+
+    results = default_scope.filter_by_name('a')
+
+    assert results.all? { |result| result.status == 'published' }
+  end
 end

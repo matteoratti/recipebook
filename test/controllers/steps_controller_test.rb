@@ -63,7 +63,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
       duration:    240
     } }
 
-    p patch step_url(@step), params: new_params
+    patch step_url(@step), params: new_params
 
     @step.reload
 

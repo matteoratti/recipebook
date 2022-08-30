@@ -127,4 +127,9 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to recipe_url(Recipe.last)
   end
+
+  test 'autocomplete response' do
+    get autocomplete_recipes_path, params: { q: 'carbonara' }
+    assert_response :success
+  end
 end

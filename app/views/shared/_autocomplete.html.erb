@@ -1,3 +1,7 @@
-<% @results.each do |result| %>
-  <li class="dropdown-item pointer py-2" role="option"><%= result.name %></li>
+<% if @results.any? %>
+  <% @results.each do |result| %>
+    <li class="dropdown-item pointer py-2" role="option"><%= result.name %></li>
+  <% end %>
+<% else %>
+    <li class="dropdown-item py-2">No matching results</li>  
 <% end %>

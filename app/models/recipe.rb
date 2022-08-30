@@ -11,6 +11,7 @@ class Recipe < ApplicationRecord
   include HasLikes
   include HasLogs
   include FilterByName
+  include FilterByStatus
 
   has_one_attached :image
 

@@ -13,8 +13,8 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.published.with_image.with_user.with_tags.with_steps
-    @recipes = Recipe.published.filter_by_name(params[:q]).with_image.with_user.with_tags.with_steps if params[:q]
+    @recipes = default_scope.with_image.with_user.with_tags.with_steps
+    @recipes = default_scope.filter_by_name(params[:q]).with_image.with_user.with_tags.with_steps if params[:q]
   end
 
   # GET /user/:id/my_recipes or /recipes.json
@@ -94,6 +94,10 @@ class RecipesController < ApplicationController
 
   def authorize_recipe
     authorize @recipe
+  end
+
+  def default_scope
+    Recipe.published
   end
 
   # Only allow a list of trusted parameters through.
