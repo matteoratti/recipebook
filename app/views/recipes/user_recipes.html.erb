@@ -1,0 +1,42 @@
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="me-auto col-3">
+        <div class="border-0 shadow mb-6 mb-lg-0 card">
+          <div class="bg-gray-100 py-4 border-0 text-center card-header">
+            <!-- avatar -->
+            <div class="d-inline-block">
+              <div class="avatar p-2 mb-2">
+                <div class="position-relative h-100 overflow-hidden rounded-circle">
+                  <%= image_tag '/chef_placeholder.jpeg'%>
+                </div>
+              </div>
+            </div>
+            <h5><%= @user.email %></h5>
+            <!-- like user button  -->
+            <div class="">
+              <%= like_element(@user) if policy(@user).like? %>
+            </div>
+          </div>
+          <div class="p-4 card-body">
+            <!-- total likes counter -->
+            <div class="d-flex align-items-center mb-3">
+              <div class="total-likes-icon me-2">
+                <i class="bi bi-heart-fill"></i>
+              </div>
+              <div>
+                3000 likes
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- user all recipes -->
+      <div class="ps-3 col-9">
+        <div class="row">
+          <%= render "recipes", recipes: @recipes, col: "col-4" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

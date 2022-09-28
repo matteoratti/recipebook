@@ -42,7 +42,7 @@
         </a>
         <ul id="userMenuDropdown" class="dropdown-menu" aria-labelledby="userMenu">
           <li>
-            <%= link_to my_recipes_user_path(current_user), class: "dropdown-item" do %>
+            <%= link_to all_user_recipes_path(current_user), class: "dropdown-item" do %>
               <%= content_tag(:i, "", class: "bi bi-book me-2") %>
               my recipes
             <% end %>

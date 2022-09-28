@@ -26,4 +26,10 @@
   </div>
 </div>
 
-<%= render "recipes", recipes: @recipes %>
+<div class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <%= render "recipes", recipes: @recipes, col: "col-3" %>
+    </div>
+  </div>
+</div>
