@@ -16,7 +16,7 @@ class User < ApplicationRecord
   def logify(target, action, receivers = nil, changed_data = nil)
     activity_type = ActivityType.find_or_create_by(name: action)
 
-    activity_log = ActivityLog.create(actor: self, target: target, activity_type_id: activity_type.id, changed_data: changed_data)
+    activity_log = ActivityLog.create(actor: self, target:, activity_type_id: activity_type.id, changed_data:)
 
     SendNotificationJob.perform_later(activity_log, receivers) if receivers
   end

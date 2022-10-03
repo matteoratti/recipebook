@@ -30,7 +30,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
     } }
 
     assert_difference('Step.count') do
-      post recipe_steps_url(@recipe), params: params
+      post recipe_steps_url(@recipe), params:
     end
 
     assert_response :success
@@ -47,7 +47,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
     } }
 
     assert_no_difference('Step.count') do
-      post recipe_steps_url(@recipe), params: params
+      post recipe_steps_url(@recipe), params:
     end
 
     assert_response :unprocessable_entity
@@ -122,7 +122,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
     } }
 
     assert_difference('Step.count') do
-      post recipe_steps_url(@recipe), params: params
+      post recipe_steps_url(@recipe), params:
     end
 
     assert_equal params[:step][:step_ingredients_attributes]['0'][:ingredient_attributes][:name],

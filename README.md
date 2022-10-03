@@ -3,7 +3,7 @@
 Manage your own recipes with this wep app made in Ruby on Rails.
 
 ## Ruby version
-  * ruby 3.0.0
+  * ruby 3.1.2
 
 ## System dependencies
 
