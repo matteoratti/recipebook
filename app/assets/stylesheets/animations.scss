@@ -21,3 +21,11 @@
     margin-top: 0;
   }
 }
+
+.hover-animate {
+  transition: all .2s ease-in-out;
+}
+
+.hover-animate:focus, .hover-animate:hover {
+  transform: translate3d(0,-2px,0);
+}

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RecipesController < ApplicationController
-  before_action :set_user, only: %i[new create]
+  before_action :set_user, only: %i[new create user_recipes]
   before_action :set_recipe, only: %i[show edit update destroy add_step delete_image archive publish]
   before_action :authenticate_user!, only: %i[new create edit update destroy archive publish user_recipes]
   before_action :authorize_recipe, only: %i[edit update destroy archive publish]
@@ -20,6 +20,12 @@ class RecipesController < ApplicationController
   # GET /user/:id/my_recipes or /recipes.json
   def my_recipes
     @recipes = current_user.recipes.with_image.with_steps
+  end
+
+  # GET /user/:id/user_recipes or /recipes.json
+  def user_recipes
+    @recipes = @user.recipes.with_image.with_user.with_tags
+    @recipes = @recipes.published if @user != current_user
   end
 
   # GET /recipes/1 or /recipes/1.json

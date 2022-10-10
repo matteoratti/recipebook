@@ -1,5 +1,5 @@
-<div class="mb-5 col-3">
-  <div class="card shadow-sm recipe-card text-secondary text-decoration-none shadow border-0">
+<div class="mb-5 hover-animate <%= col %>">
+  <div class="card shadow-sm recipe-card text-secondary shadow border-0">
     <%= link_to recipe do %>
       <%= recipe_image(recipe) %>
     <% end %>
@@ -9,9 +9,9 @@
         <small><%= like_counter(recipe) %></small>
       </div>
       <h4><%= recipe.name.capitalize %></h4>
-      <%= recipe_status(recipe.status) if action_name == "my_recipes" %>
+      <%= recipe_status(recipe.status) if action_name == "user_recipes" && recipe.user == current_user %>
       <p class="card-text"><%= recipe.body.capitalize %></p>
-      <p class="text-dark">By <%= recipe.user.email %></p>
+      <%= link_to "By #{recipe.user.email}", all_user_recipes_path(recipe.user), class: "text-dark" if action_name == "index" %>
       <p class="text-sm mb-0">
         <% recipe.tags.each do |tag| %>
           <a class="recipe-tag" href="#">
