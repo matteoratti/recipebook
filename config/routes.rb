@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :recipes, concerns: %i[likeable autocompletable], only: %i[index]
   resources :users, concerns: %i[likeable], only: %i[]
 
-  get 'users/:user_id/user_recipes', to: 'recipes#user_recipes', as: "all_user_recipes"
+  get 'users/:user_id/user_recipes', to: 'recipes#user_recipes', as: 'all_user_recipes'
 
   resources :users, only: %i[], concerns: %i[likeable], shallow: true do
     member do

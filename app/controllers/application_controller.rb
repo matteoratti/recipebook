@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
   private
 
   def like_of_current_user(likeable)
-    current_user.liked.find_by(likeable: likeable)
+    current_user.liked.find_by(likeable:)
   end
 end

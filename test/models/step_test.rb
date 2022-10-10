@@ -5,7 +5,7 @@ require 'test_helper'
 class StepTest < ActiveSupport::TestCase
   def setup
     recipe = recipes(:carbonara)
-    @step = Step.new(recipe: recipe, description: 'sbattere le uova', order: 1, body: 'this is a body', duration: 1200)
+    @step = Step.new(recipe:, description: 'sbattere le uova', order: 1, body: 'this is a body', duration: 1200)
   end
 
   test 'valid step' do
@@ -50,7 +50,7 @@ class StepTest < ActiveSupport::TestCase
 
     assert_not Ingredient.find_by_name(ingredient.name)
 
-    @step.step_ingredients.build({ step: @step, ingredient: ingredient, quantity: 10 })
+    @step.step_ingredients.build({ step: @step, ingredient:, quantity: 10 })
     @step.save
 
     assert Ingredient.find_by_name(ingredient.name)
@@ -61,7 +61,7 @@ class StepTest < ActiveSupport::TestCase
 
     assert Ingredient.find(ingredient.id)
 
-    @step.step_ingredients.build({ step: @step, ingredient: ingredient, quantity: 10 })
+    @step.step_ingredients.build({ step: @step, ingredient:, quantity: 10 })
     @step.save
 
     assert @step.step_ingredients.first.ingredient.id == ingredient.id
